@@ -56,6 +56,8 @@ void InputManager::handleInput()
 
             break;
         case SDL_MOUSEBUTTONDOWN:
+            startDrag(this);
+
             if (m_event.button.button == SDL_BUTTON_LEFT)
             {
                 m_mouseIsPressed = true;
@@ -67,6 +69,10 @@ void InputManager::handleInput()
             }
 
             break;
+        case SDL_MOUSEBUTTONUP:
+			stopDrag(this);
+
+			break;
         }
     }
     SDL_StartTextInput();
