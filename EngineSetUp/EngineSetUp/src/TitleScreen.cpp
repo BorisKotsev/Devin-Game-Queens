@@ -1,4 +1,7 @@
 #include "TitleScreen.h"
+#include "World.h"
+
+extern World world;
 
 TitleScreen::TitleScreen()
 {
@@ -25,13 +28,14 @@ void TitleScreen::init()
 	
 	stream.close();
 
-	// m_titleScreenLogo.texture = LoadTexture(logo);
-	// m_titleScreenText.texture = LoadTexture(txt);
+	m_titleScreenLogo.texture = loadTexture(MENU_FOLDER + logo);
+	m_titleScreenText.texture = loadTexture(MENU_FOLDER + txt);
 }
 
 void TitleScreen::run()
 {
-		
+	drawObject(m_titleScreenText);
+	drawObject(m_titleScreenLogo);
 }
 
 void TitleScreen::destroy()

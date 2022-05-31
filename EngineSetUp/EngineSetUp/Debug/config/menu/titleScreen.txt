@@ -1,6 +1,6 @@
 Logo_Rect: 0 0 1920 1080
 
-Logo_Img: img.bmp
+Logo_Img: TitleScreen.bmp
 
 Text_Rect: 639 921 642 159
 
