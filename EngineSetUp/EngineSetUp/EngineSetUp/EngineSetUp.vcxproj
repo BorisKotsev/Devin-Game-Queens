@@ -150,6 +150,7 @@
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Menu.cpp" />
     <ClCompile Include="..\src\Presenter.cpp" />
+    <ClCompile Include="..\src\SoundManager.cpp" />
     <ClCompile Include="..\src\State.cpp" />
     <ClCompile Include="..\src\StateManager.cpp" />
     <ClCompile Include="..\src\TitleScreen.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="..\include\InputManager.h" />
     <ClInclude Include="..\include\Menu.h" />
     <ClInclude Include="..\include\Presenter.h" />
+    <ClInclude Include="..\include\SoundManager.h" />
     <ClInclude Include="..\include\State.h" />
     <ClInclude Include="..\include\StateManager.h" />
     <ClInclude Include="..\include\TitleScreen.h" />

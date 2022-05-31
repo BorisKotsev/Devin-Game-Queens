@@ -5,3 +5,7 @@ Logo_Img: TitleScreen.bmp
 Text_Rect: 644 921 632 60
 
 Text_Img: Press_Any_Key.bmp 
+
+Opacity: 0
+
+ChangePerFrame: 1 

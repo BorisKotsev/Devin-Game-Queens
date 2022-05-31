@@ -93,11 +93,11 @@ void Presenter::drawObject(Drawable& drawable)
     SDL_RenderCopy(m_main_renderer, drawable.texture, NULL, &drawable.rect);
 }
 
-void Presenter::drawObject(Drawable& drawable, double opacity)
+void Presenter::drawObject(DrawableWithOpacity& drawable)
 {
-    SDL_SetTextureAlphaMod(drawable.texture, opacity);
+    SDL_SetTextureAlphaMod(drawable.texture, drawable.opacity);
 	
-    SDL_RenderCopy(m_main_renderer, drawable.texture, NULL, NULL);
+    SDL_RenderCopy(m_main_renderer, drawable.texture, NULL, &drawable.rect);
 }
 
 void Presenter::drawLine(/*line ln, */ float2 start, float2 finish)

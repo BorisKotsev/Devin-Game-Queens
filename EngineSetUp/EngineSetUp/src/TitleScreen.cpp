@@ -25,6 +25,8 @@ void TitleScreen::init()
 	stream >> tmp >> logo;
 	stream >> tmp >> m_titleScreenText.rect.x >> m_titleScreenText.rect.y >> m_titleScreenText.rect.w >> m_titleScreenText.rect.h;
 	stream >> tmp >> txt;
+	stream >> tmp >> m_titleScreenText.opacity;
+	stream >> tmp >> m_titleScreenText.changePerFrame;
 	
 	stream.close();
 
@@ -35,11 +37,26 @@ void TitleScreen::init()
 void TitleScreen::run()
 {
 	drawObject(m_titleScreenLogo);
-	//drawObject(m_titleScreenText, 19.0);
+
+	changeOpacity(m_titleScreenText.changePerFrame);
+	
+	drawObject(m_titleScreenText);
 }
 
 void TitleScreen::destroy()
 {
 	SDL_DestroyTexture(m_titleScreenText.texture);
 	SDL_DestroyTexture(m_titleScreenLogo.texture);
+}
+
+void TitleScreen::changeOpacity(int changePerFrame)
+{
+	if (m_titleScreenText.opacity < 255)
+	{
+		m_titleScreenText.opacity += changePerFrame;
+	}
+	else
+	{
+		m_titleScreenText.opacity = 0;
+	}
 }

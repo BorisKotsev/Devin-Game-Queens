@@ -56,6 +56,9 @@
     <ClCompile Include="..\src\Button.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\SoundManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Writer.h">
@@ -95,6 +98,9 @@
       <Filter>include\STATES</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Button.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SoundManager.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
