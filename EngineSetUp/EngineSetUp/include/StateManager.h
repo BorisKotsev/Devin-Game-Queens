@@ -6,11 +6,8 @@
 enum class GAME_STATE
 {
 	NONE = 0,
-	REGISTER = 1,
-	LOGIN = 2,
-	LOBBY_AREA = 3,
-	MATCHMAKING_CLIENT = 4,
-	GAME = 5
+	GAME = 1,
+	TITLE_SCREEN = 2
 };
 
 /*
@@ -34,7 +31,7 @@ public:
 	State* m_currState;
 	
 	void init(GAME_STATE _state);
-	void update();
+	void run();
 
 	void changeGameState(GAME_STATE _state);
 
