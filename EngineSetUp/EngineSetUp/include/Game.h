@@ -4,5 +4,10 @@
 
 class Game : public State
 {
-	
+public:
+	Game();
+	~Game();
+
+private:
+
 };

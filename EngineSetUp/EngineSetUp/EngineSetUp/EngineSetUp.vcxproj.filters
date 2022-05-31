@@ -47,6 +47,9 @@
     <ClCompile Include="..\src\StateManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Grid.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Writer.h">
@@ -80,6 +83,9 @@
       <Filter>include\STATES</Filter>
     </ClInclude>
     <ClInclude Include="..\include\StateManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Grid.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

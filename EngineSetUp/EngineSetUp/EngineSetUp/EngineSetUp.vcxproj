@@ -145,6 +145,7 @@
     <ClCompile Include="..\src\Engine.cpp" />
     <ClCompile Include="..\src\ErrorHandler.cpp" />
     <ClCompile Include="..\src\Game.cpp" />
+    <ClCompile Include="..\src\Grid.cpp" />
     <ClCompile Include="..\src\InputManager.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Presenter.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="..\include\defines.h" />
     <ClInclude Include="..\include\Engine.h" />
     <ClInclude Include="..\include\ErrorHandler.h" />
+    <ClInclude Include="..\include\Grid.h" />
     <ClInclude Include="..\include\InputManager.h" />
     <ClInclude Include="..\include\Presenter.h" />
     <ClInclude Include="..\include\State.h" />
