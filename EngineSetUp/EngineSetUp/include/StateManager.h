@@ -28,10 +28,11 @@ public:
 
 	GAME_STATE m_gameState;
 
-
-	State* m_currState;
 	Game* m_game;
-
+	TitleScreen* m_titleScreen;
+	
+	State* m_currState;
+	
 	void init(GAME_STATE _state);
 	void update();
 
