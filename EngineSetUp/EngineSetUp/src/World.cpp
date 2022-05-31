@@ -2,6 +2,7 @@
 
 World::World()
 {
+	m_isRunning = true;
 }
 
 World::~World()

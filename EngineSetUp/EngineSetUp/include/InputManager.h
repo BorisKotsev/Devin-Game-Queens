@@ -38,15 +38,6 @@ public:
 
     const Uint8* m_keyboardState;
 
-    SDL_Scancode m_shop;
-
-    pair<bool, SDL_Scancode> m_up;
-    pair<bool, SDL_Scancode> m_down;
-    pair<bool, SDL_Scancode> m_left;
-    pair<bool, SDL_Scancode> m_right;
-    pair<bool, SDL_Scancode> m_craft;
-    pair<bool, SDL_Scancode> m_space;
-
     int m_scroll;
 
     string getInputData();
