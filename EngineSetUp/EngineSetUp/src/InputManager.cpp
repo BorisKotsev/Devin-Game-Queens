@@ -1,0 +1,276 @@
+#include "InputManager.h"
+
+InputManager::InputManager()
+{
+    m_scroll = 0;
+}
+
+InputManager::~InputManager()
+{
+    delete m_keyboardState;
+}
+
+void InputManager::setMouseMultiply(float2 multiplier)
+{
+    m_mouseMultiply.x = multiplier.x;
+    m_mouseMultiply.y = multiplier.y;
+}
+
+void startDrag(void* handleInput)
+{
+    InputManager* inputManager = (InputManager*)handleInput;
+
+    inputManager->m_drag = true;
+}
+
+void stopDrag(void* handleInput)
+{
+    InputManager* inputManager = (InputManager*)handleInput;
+
+    inputManager->m_drag = false;
+}
+
+void InputManager::init(string path)
+{
+    path = CONFIG_FOLDER + path;
+
+    fstream stream;
+    string tmp;
+
+    int move_up, move_down, move_left, move_right, craft, space, shop;
+
+    stream.open(path);
+
+    stream >> tmp >> move_up;
+    stream >> tmp >> move_down;
+    stream >> tmp >> move_left;
+    stream >> tmp >> move_right;
+    stream >> tmp >> craft;
+    stream >> tmp >> space;
+    stream >> tmp >> shop;
+
+    stream.close();
+
+    m_up.second = (SDL_Scancode)move_up;
+    m_down.second = (SDL_Scancode)move_down;
+    m_left.second = (SDL_Scancode)move_left;
+    m_right.second = (SDL_Scancode)move_right;
+    m_craft.second = (SDL_Scancode)craft;
+    m_space.second = (SDL_Scancode)space;
+
+    m_shop = (SDL_Scancode)shop;
+}
+
+void InputManager::handleInput()
+{
+    m_mouseIsPressed = false;
+    m_mouseIsDoubleClicked = false;
+    m_mouseIsRightPressed = false;
+
+    while (SDL_PollEvent(&m_event))
+    {
+        switch (m_event.type)
+        {
+        case SDL_MOUSEMOTION:
+            SDL_GetMouseState(&(m_mouseCoor.x), &(m_mouseCoor.y));
+
+            m_mouseCoor.x *= m_mouseMultiply.x;
+            m_mouseCoor.y *= m_mouseMultiply.y;
+
+            break;
+        case SDL_MOUSEBUTTONDOWN:
+            if (m_event.button.button == SDL_BUTTON_LEFT)
+            {
+                m_mouseIsPressed = true;
+            }
+
+            if (m_event.button.button == SDL_BUTTON_RIGHT)
+            {
+                m_mouseIsRightPressed = true;
+            }
+
+            break;
+        }
+    }
+    SDL_StartTextInput();
+
+    m_keyboardState = SDL_GetKeyboardState(NULL);
+
+    m_scroll = 0;
+
+    switch (m_event.wheel.type)
+    {
+    case SDL_MOUSEWHEEL:
+        m_scroll = m_event.wheel.y;
+        break;
+
+    default:
+        break;
+    }
+
+    m_event.wheel = SDL_MouseWheelEvent();
+
+    if (m_textInputIsActive)
+    {
+        if (m_event.type == SDL_TEXTINPUT || m_event.type == SDL_KEYDOWN)
+        {
+            if (m_event.type == SDL_KEYDOWN && m_event.key.keysym.sym == SDLK_BACKSPACE && m_textInput.length() > 0)
+            {
+                m_textInput = m_textInput.substr(0, m_textInput.length() - 1);
+            }
+            if (m_event.type == SDL_TEXTINPUT)
+            {
+                m_textInput += m_event.text.text;
+            }
+        }
+    }
+    else
+    {
+        if (m_keyboardState != NULL) //DELAY MUST BE ADDED
+        {
+            m_inputDirection = { 0, 0 };
+
+            if (m_keyboardState[m_up.second])
+            {
+                m_up.first = true;
+                m_inputData += "U";
+                m_inputDirection.y = -1;
+            }
+            else
+            {
+                m_up.first = false;
+            }
+
+            if (m_keyboardState[m_down.second])
+            {
+                m_down.first = true;
+                m_inputData += "D";
+                m_inputDirection.y = 1;
+            }
+            else
+            {
+                m_down.first = false;
+            }
+
+            if (m_keyboardState[m_left.second])
+            {
+                m_left.first = true;
+                m_inputData += "L";
+                m_inputDirection.x = -1;
+            }
+            else
+            {
+                m_left.first = false;
+            }
+
+            if (m_keyboardState[m_right.second])
+            {
+                m_right.first = true;
+                m_inputData += "R";
+                m_inputDirection.x = 1;
+            }
+            else
+            {
+                m_right.first = false;
+            }
+
+            if (m_keyboardState[m_craft.second])
+            {
+                m_craft.first = true;
+            }
+            else
+            {
+                m_craft.first = false;
+            }
+            if (m_keyboardState[m_space.second])
+            {
+                m_space.first = true;
+            }
+            else
+            {
+                m_space.first = false;
+            }
+        }
+    }
+
+    if (m_mouseIsPressed)
+    {
+        if (!m_mouseIsPressedPrevFrame)
+        {
+            m_mouseOnClick = true;
+        }
+        else
+        {
+            m_mouseOnClick = false;
+        }
+
+        m_mouseIsHolded = true;
+    }
+    else
+    {
+        m_mouseIsPressedPrevFrame = false;
+        m_mouseOnClick = false;
+    }
+}
+
+bool InputManager::isSpacePressed()
+{
+    /*if (m_event.type == SDL_KEYDOWN)*/
+    return m_event.type == SDL_KEYDOWN && m_event.key.keysym.sym == SDLK_SPACE;
+
+    /*if (m_event.type == SDL_KEYDOWN && m_event.key.keysym.sym == SDLK_SPACE)
+    {
+        return true;
+    }
+    return false;*/
+}
+
+bool InputManager::isSpaceReleased()
+{
+    return m_event.type == SDL_KEYUP && m_event.key.keysym.sym == SDLK_SPACE;
+}
+
+string InputManager::getInputData()
+{
+    if (m_inputData != "")
+    {
+        string returnValue = m_inputData;
+        m_inputData.clear();
+
+        return returnValue;
+    }
+
+    return m_inputData;
+}
+
+
+void InputManager::startTextInput()
+{
+    SDL_StartTextInput();
+
+    m_textInput = "";
+
+    m_textInputIsActive = true;
+}
+
+void InputManager::stopTextInput()
+{
+    SDL_StopTextInput();
+
+    m_textInputIsActive = false;
+}
+
+string InputManager::getTextInput()
+{
+    return m_textInput;
+}
+
+void InputManager::resetText()
+{
+    m_textInput = "";
+}
+
+void InputManager::setPlayerScreenPos(int2* playerScreenPos)
+{
+    m_playerScreenPos = playerScreenPos;
+}

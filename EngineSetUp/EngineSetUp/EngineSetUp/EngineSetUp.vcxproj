@@ -144,16 +144,25 @@
   <ItemGroup>
     <ClCompile Include="..\src\Engine.cpp" />
     <ClCompile Include="..\src\ErrorHandler.cpp" />
+    <ClCompile Include="..\src\Game.cpp" />
+    <ClCompile Include="..\src\InputManager.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Presenter.cpp" />
+    <ClCompile Include="..\src\State.cpp" />
+    <ClCompile Include="..\src\StateManager.cpp" />
+    <ClCompile Include="..\src\World.cpp" />
     <ClCompile Include="..\src\Writer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Game.h" />
     <ClInclude Include="..\include\defines.h" />
     <ClInclude Include="..\include\Engine.h" />
     <ClInclude Include="..\include\ErrorHandler.h" />
-    <ClInclude Include="..\include\Game.h" />
+    <ClInclude Include="..\include\InputManager.h" />
     <ClInclude Include="..\include\Presenter.h" />
+    <ClInclude Include="..\include\State.h" />
+    <ClInclude Include="..\include\StateManager.h" />
+    <ClInclude Include="..\include\TitleScreen.h" />
     <ClInclude Include="..\include\World.h" />
     <ClInclude Include="..\include\Writer.h" />
   </ItemGroup>

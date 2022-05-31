@@ -9,6 +9,12 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="src\STATES">
+      <UniqueIdentifier>{d24cc8e1-7341-4817-9c55-7ed8a81143a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\STATES">
+      <UniqueIdentifier>{00b375e3-0d71-47f3-b919-0b8e1f89a046}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Presenter.cpp">
@@ -26,6 +32,21 @@
     <ClCompile Include="..\src\Engine.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Game.cpp">
+      <Filter>src\STATES</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\State.cpp">
+      <Filter>src\STATES</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\World.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\InputManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StateManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Writer.h">
@@ -37,9 +58,6 @@
     <ClInclude Include="..\include\ErrorHandler.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Game.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Presenter.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -47,6 +65,21 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Engine.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\State.h">
+      <Filter>include\STATES</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\TitleScreen.h">
+      <Filter>include\STATES</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\InputManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Game.h">
+      <Filter>include\STATES</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\StateManager.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

@@ -17,7 +17,8 @@
 mono_crash.*
 
 # Build results
-[Dd]ebug/
+[Dd]ebug/EngineSetUp.exe
+[Dd]ebug/EngineSetUp.pdb
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
