@@ -19,7 +19,7 @@ void TitleScreen::init()
 	
 	string tmp, txt, logo;
 
-	stream.open(CONFIG_FOLDER + MENU_FOLDER + "titleScreen.txt");
+	stream.open(CONFIG_FOLDER + TITLE_SCREEN_FOLDER + "titleScreen.txt");
 
 	stream >> tmp >> m_titleScreenLogo.rect.x >> m_titleScreenLogo.rect.y >> m_titleScreenLogo.rect.w >> m_titleScreenLogo.rect.h;
 	stream >> tmp >> logo;
@@ -28,14 +28,14 @@ void TitleScreen::init()
 	
 	stream.close();
 
-	m_titleScreenLogo.texture = loadTexture(MENU_FOLDER + logo);
-	m_titleScreenText.texture = loadTexture(MENU_FOLDER + txt);
+	m_titleScreenLogo.texture = loadTexture(TITLE_SCREEN_FOLDER + logo);
+	m_titleScreenText.texture = loadTexture(TITLE_SCREEN_FOLDER + txt);
 }
 
 void TitleScreen::run()
 {
-	drawObject(m_titleScreenText);
 	drawObject(m_titleScreenLogo);
+	//drawObject(m_titleScreenText, 19.0);
 }
 
 void TitleScreen::destroy()

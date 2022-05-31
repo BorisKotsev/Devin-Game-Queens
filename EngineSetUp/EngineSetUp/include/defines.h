@@ -40,6 +40,8 @@ static string VFX_FOLDER = "vfx\\";
 static string HUD_FOLDER = "hud\\";
 static string IN_GAME_BUTTONS_FOLDER = "InGameButtons\\";
 static string CONFIG_MANAGER_FOLDER = "configManager\\";
+static string SOUND_FOLDER = "sound\\";
+static string TITLE_SCREEN_FOLDER = "TitleScreen\\";
 
 struct int2
 {

@@ -2,6 +2,7 @@
 
 World::World()
 {
+	m_isRunning = true;
 }
 
 World::~World()
@@ -12,7 +13,7 @@ void World::init()
 {
 	m_presenter.init();
 
-	m_stateManager.init(GAME_STATE::TITLE_SCREEN);
+	m_stateManager.init(GAME_STATE::MENU);
 }
 
 void World::run()

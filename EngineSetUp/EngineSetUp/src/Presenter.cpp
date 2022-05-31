@@ -1,5 +1,9 @@
 #include "Presenter.h"
 
+#include "World.h"
+
+extern World world;
+
 SDL_Window* Presenter::m_main_window = nullptr;
 SDL_Renderer* Presenter::m_main_renderer = nullptr;
 unsigned int Presenter::m_SCREEN_WIDTH = 0;
@@ -59,7 +63,7 @@ void Presenter::improveRenderer()
         cout << "SDL_IMPROVE_RENDERER FAILED: %s\n" << SDL_GetError() << endl;
     }
 
-    //client.m_inputManager.setMouseMultiply(mouseMultiply);
+    world.m_inputManager.setMouseMultiply(mouseMultiply);
 
     SDL_RenderSetLogicalSize(m_main_renderer, m_SCREEN_WIDTH, m_SCREEN_HEIGHT);
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
@@ -87,6 +91,13 @@ void Presenter::drawObject(SDL_Texture* texture)
 void Presenter::drawObject(Drawable& drawable)
 {
     SDL_RenderCopy(m_main_renderer, drawable.texture, NULL, &drawable.rect);
+}
+
+void Presenter::drawObject(Drawable& drawable, double opacity)
+{
+    SDL_SetTextureAlphaMod(drawable.texture, opacity);
+	
+    SDL_RenderCopy(m_main_renderer, drawable.texture, NULL, NULL);
 }
 
 void Presenter::drawLine(/*line ln, */ float2 start, float2 finish)

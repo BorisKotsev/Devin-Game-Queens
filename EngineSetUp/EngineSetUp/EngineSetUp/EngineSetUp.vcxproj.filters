@@ -50,6 +50,12 @@
     <ClCompile Include="..\src\TitleScreen.cpp">
       <Filter>src\STATES</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Menu.cpp">
+      <Filter>src\STATES</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Button.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Writer.h">
@@ -83,6 +89,12 @@
       <Filter>include\STATES</Filter>
     </ClInclude>
     <ClInclude Include="..\include\StateManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Menu.h">
+      <Filter>include\STATES</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Button.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

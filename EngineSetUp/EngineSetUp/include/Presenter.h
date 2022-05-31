@@ -34,6 +34,7 @@ public:
 
 	static void drawObject(SDL_Texture* texture);
 	static void drawObject(Drawable& drawable);
+	static void drawObject(Drawable& drawable, double opacity);
 	
 	void drawLine(/*line ln, */ float2 start, float2 finish);
 

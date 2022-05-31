@@ -36,29 +36,6 @@ void InputManager::init(string path)
 
     fstream stream;
     string tmp;
-
-    int move_up, move_down, move_left, move_right, craft, space, shop;
-
-    stream.open(path);
-
-    stream >> tmp >> move_up;
-    stream >> tmp >> move_down;
-    stream >> tmp >> move_left;
-    stream >> tmp >> move_right;
-    stream >> tmp >> craft;
-    stream >> tmp >> space;
-    stream >> tmp >> shop;
-
-    stream.close();
-
-    m_up.second = (SDL_Scancode)move_up;
-    m_down.second = (SDL_Scancode)move_down;
-    m_left.second = (SDL_Scancode)move_left;
-    m_right.second = (SDL_Scancode)move_right;
-    m_craft.second = (SDL_Scancode)craft;
-    m_space.second = (SDL_Scancode)space;
-
-    m_shop = (SDL_Scancode)shop;
 }
 
 void InputManager::handleInput()
@@ -128,68 +105,7 @@ void InputManager::handleInput()
     {
         if (m_keyboardState != NULL) //DELAY MUST BE ADDED
         {
-            m_inputDirection = { 0, 0 };
-
-            if (m_keyboardState[m_up.second])
-            {
-                m_up.first = true;
-                m_inputData += "U";
-                m_inputDirection.y = -1;
-            }
-            else
-            {
-                m_up.first = false;
-            }
-
-            if (m_keyboardState[m_down.second])
-            {
-                m_down.first = true;
-                m_inputData += "D";
-                m_inputDirection.y = 1;
-            }
-            else
-            {
-                m_down.first = false;
-            }
-
-            if (m_keyboardState[m_left.second])
-            {
-                m_left.first = true;
-                m_inputData += "L";
-                m_inputDirection.x = -1;
-            }
-            else
-            {
-                m_left.first = false;
-            }
-
-            if (m_keyboardState[m_right.second])
-            {
-                m_right.first = true;
-                m_inputData += "R";
-                m_inputDirection.x = 1;
-            }
-            else
-            {
-                m_right.first = false;
-            }
-
-            if (m_keyboardState[m_craft.second])
-            {
-                m_craft.first = true;
-            }
-            else
-            {
-                m_craft.first = false;
-            }
-            if (m_keyboardState[m_space.second])
-            {
-                m_space.first = true;
-            }
-            else
-            {
-                m_space.first = false;
-            }
+            
         }
     }
 
@@ -210,6 +126,12 @@ void InputManager::handleInput()
     {
         m_mouseIsPressedPrevFrame = false;
         m_mouseOnClick = false;
+    }
+
+    if (m_drag)
+    {
+        D(m_mouseCoor.x);
+        D(m_mouseCoor.y);
     }
 }
 
