@@ -150,6 +150,7 @@
     <ClCompile Include="..\src\Presenter.cpp" />
     <ClCompile Include="..\src\State.cpp" />
     <ClCompile Include="..\src\StateManager.cpp" />
+    <ClCompile Include="..\src\TitleScreen.cpp" />
     <ClCompile Include="..\src\World.cpp" />
     <ClCompile Include="..\src\Writer.cpp" />
   </ItemGroup>
