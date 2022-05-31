@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Game.h"
+#include "TitleScreen.h"
 
 enum class GAME_STATE
 {
@@ -19,15 +20,17 @@ enum class GAME_STATE
 * must be playd between the creation and destruction of
 * objects
 */
-class GameManager
+class StateManager
 {
 public:
-	GameManager();
-	~GameManager();
+	StateManager();
+	~StateManager();
 
 	GAME_STATE m_gameState;
 
+
 	State* m_currState;
+	Game* m_game;
 
 	void init(GAME_STATE _state);
 	void update();

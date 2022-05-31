@@ -4,5 +4,8 @@
 
 class Game : public State
 {
-	
+public:
+	void init();
+	void destroy();
+	void run();
 };
