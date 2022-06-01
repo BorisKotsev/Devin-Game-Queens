@@ -13,7 +13,7 @@ void World::init()
 {
 	m_presenter.init();
 
-	m_stateManager.init(GAME_STATE::TITLE_SCREEN);
+	m_stateManager.init(GAME_STATE::GAME);
 }
 
 void World::run()

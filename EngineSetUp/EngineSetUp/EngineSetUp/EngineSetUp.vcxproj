@@ -142,7 +142,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\ConfigManager.cpp" />
     <ClCompile Include="..\src\Engine.cpp" />
+    <ClCompile Include="..\src\Entity.cpp" />
     <ClCompile Include="..\src\ErrorHandler.cpp" />
     <ClCompile Include="..\src\Game.cpp" />
     <ClCompile Include="..\src\Grid.cpp" />
@@ -156,6 +158,8 @@
     <ClCompile Include="..\src\Writer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\ConfigManager.h" />
+    <ClInclude Include="..\include\Entity.h" />
     <ClInclude Include="..\include\Game.h" />
     <ClInclude Include="..\include\defines.h" />
     <ClInclude Include="..\include\Engine.h" />

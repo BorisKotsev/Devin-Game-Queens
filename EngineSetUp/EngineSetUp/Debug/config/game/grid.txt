@@ -1,0 +1,4 @@
+coordinates: 600 100
+dimensions: 8 8
+squareSize: 100
+borderThickness: 20
