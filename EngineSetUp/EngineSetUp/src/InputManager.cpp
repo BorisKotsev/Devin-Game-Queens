@@ -198,6 +198,11 @@ void InputManager::resetText()
     m_textInput = "";
 }
 
+bool InputManager::anyKeyIsPressed() //@Kosio
+{
+    return false;
+}
+
 void InputManager::setPlayerScreenPos(int2* playerScreenPos)
 {
     m_playerScreenPos = playerScreenPos;

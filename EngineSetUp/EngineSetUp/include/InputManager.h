@@ -53,6 +53,8 @@ public:
     void stopTextInput();
     void resetText();
 
+    bool anyKeyIsPressed();
+
     string getTextInput();
 private:
     SDL_Event m_event;
