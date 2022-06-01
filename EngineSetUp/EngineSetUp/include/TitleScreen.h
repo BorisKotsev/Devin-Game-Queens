@@ -20,5 +20,5 @@ private:
 	Drawable m_titleScreenLogo;
 	DrawableWithOpacity m_titleScreenText;
 
-	void changeOpacity(int changePerFrame);
+	void changeOpacity();
 };

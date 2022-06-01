@@ -215,6 +215,6 @@ struct Drawable
 
 struct DrawableWithOpacity : public Drawable
 {
-    double opacity = 0;
+    int opacity = 0;
     int changePerFrame = 0;
 };
