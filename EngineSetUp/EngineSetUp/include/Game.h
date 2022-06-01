@@ -7,6 +7,10 @@ class Game : public State
 public:
 	Game();
 	~Game();
+	void init();
+	void destroy();
+	void run();
+
 
 private:
 

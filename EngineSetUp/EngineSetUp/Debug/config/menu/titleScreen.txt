@@ -1,0 +1,7 @@
+Logo_Rect: 0 0 1920 1080
+
+Logo_Img: img.bmp
+
+Text_Rect: 639 921 642 159
+
+Text_Img: Press_Any_Key.bmp 

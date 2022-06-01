@@ -47,8 +47,8 @@
     <ClCompile Include="..\src\StateManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Grid.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="..\src\TitleScreen.cpp">
+      <Filter>src\STATES</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

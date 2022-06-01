@@ -1,9 +1,13 @@
 #include "Game.h"
 
-Game::Game()
+void Game::init()
 {
 }
 
-Game::~Game()
+void Game::destroy()
+{
+}
+
+void Game::run()
 {
 }
