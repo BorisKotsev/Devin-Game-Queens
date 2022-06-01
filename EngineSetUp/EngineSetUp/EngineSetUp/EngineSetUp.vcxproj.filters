@@ -43,6 +43,15 @@
     <ClCompile Include="..\src\Entity.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Menu.cpp">
+      <Filter>src\STATES</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Button.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SoundManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\State.h">
@@ -85,6 +94,15 @@
       <Filter>include\GENERAL</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Entity.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Menu.h">
+      <Filter>include\STATES</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Button.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SoundManager.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

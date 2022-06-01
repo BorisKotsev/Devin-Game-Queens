@@ -40,6 +40,8 @@ static string VFX_FOLDER = "vfx\\";
 static string HUD_FOLDER = "hud\\";
 static string IN_GAME_BUTTONS_FOLDER = "InGameButtons\\";
 static string CONFIG_MANAGER_FOLDER = "configManager\\";
+static string SOUND_FOLDER = "music\\";
+static string TITLE_SCREEN_FOLDER = "titleScreen\\";
 
 struct int2
 {
@@ -209,4 +211,10 @@ struct Drawable
 {
     SDL_Texture* texture = nullptr;
     SDL_Rect rect = { 0 }; /// The rect where we draw
+};
+
+struct DrawableWithOpacity : public Drawable
+{
+    double opacity = 0;
+    int changePerFrame = 0;
 };
