@@ -52,6 +52,9 @@
     <ClCompile Include="..\src\SoundManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\WinScreen.cpp">
+      <Filter>src\STATES</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\State.h">
@@ -104,6 +107,9 @@
     </ClInclude>
     <ClInclude Include="..\include\SoundManager.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\WinScreen.h">
+      <Filter>include\STATES</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

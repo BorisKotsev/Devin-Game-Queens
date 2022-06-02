@@ -36,9 +36,14 @@ void TitleScreen::init()
 
 void TitleScreen::run()
 {
-	drawObject(m_titleScreenLogo);
+	if (world.m_inputManager.anyKeyIsPressed())
+	{
+		world.m_stateManager.changeGameState(GAME_STATE::MENU);
+	}
 
-	changeOpacity(m_titleScreenText.changePerFrame);
+	changeOpacity();
+
+	drawObject(m_titleScreenLogo);
 	
 	drawObject(m_titleScreenText);
 }
@@ -49,14 +54,19 @@ void TitleScreen::destroy()
 	SDL_DestroyTexture(m_titleScreenLogo.texture);
 }
 
-void TitleScreen::changeOpacity(int changePerFrame)
+void TitleScreen::changeOpacity()
 {
-	if (m_titleScreenText.opacity < 255)
+	m_titleScreenText.opacity += m_titleScreenText.changePerFrame;
+	
+	if (m_titleScreenText.opacity >= 255)
 	{
-		m_titleScreenText.opacity += changePerFrame;
+		m_titleScreenText.changePerFrame *= -1;
+		m_titleScreenText.opacity = 255;
 	}
-	else
+	
+	if (m_titleScreenText.opacity <= 50)
 	{
-		m_titleScreenText.opacity = 0;
+		m_titleScreenText.changePerFrame *= -1;
+		m_titleScreenText.opacity = 50;
 	}
 }

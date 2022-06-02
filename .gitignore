@@ -71,7 +71,10 @@ ScaffoldingReadMe.txt
 StyleCopReport.xml
 
 # Files built by Visual Studio
-Debug/EngineSetUp.exe
+EngineSetUp.exe
+*.tlog
+*.idb
+*.recipe
 *_i.c
 *_p.c
 *_h.h

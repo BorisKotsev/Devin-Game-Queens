@@ -198,6 +198,20 @@ void InputManager::resetText()
     m_textInput = "";
 }
 
+bool InputManager::anyKeyIsPressed() //@Kosio
+{
+    int numOfKeys = 322;
+	
+    for (int i = 0; i < numOfKeys; i++)
+    {
+        if (m_keyboardState[i])
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 void InputManager::setPlayerScreenPos(int2* playerScreenPos)
 {
     m_playerScreenPos = playerScreenPos;

@@ -6,6 +6,6 @@ Text_Rect: 644 921 632 60
 
 Text_Img: Press_Any_Key.bmp 
 
-Opacity: 0
+Opacity: 50
 
 ChangePerFrame: 1 
