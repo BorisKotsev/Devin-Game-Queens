@@ -14,6 +14,7 @@ struct GridModel
 	SDL_Texture* borderTexture;
 	SDL_Texture* baseTexture;
 	SDL_Texture* squareTexture;
+	SDL_Texture* canMove;
 };
 
 class ConfigManager

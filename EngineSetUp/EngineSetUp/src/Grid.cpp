@@ -34,6 +34,19 @@ void Grid::checkForRelease()
 {
 }
 
+void Grid::drawPossibleMoves()
+{
+	for(gridSquare* gs : m_possibleMoves)
+	{
+		m_possMove.rect = gs->squareDrawable.rect;
+		drawObject(m_possibleMoves);
+	}
+}
+
+void Grid::calcPossibleMoves()
+{
+}
+
 void Grid::createByGridSquareSize(int2 coordinates, int2 dimensions, int borderThickness, int squareSize, SDL_Texture* borderTexture, SDL_Texture* squareTexture)
 {
 	m_dimensions = dimensions;
