@@ -36,16 +36,17 @@ void TitleScreen::init()
 
 void TitleScreen::run()
 {
-	if (world.m_inputManager.anyKeyIsPressed())
-	{
-		world.m_stateManager.changeGameState(GAME_STATE::MENU);
-	}
-
 	changeOpacity();
 
 	drawObject(m_titleScreenLogo);
 	
 	drawObject(m_titleScreenText);
+
+	if (world.m_inputManager.anyKeyIsPressed())
+	{
+		world.m_stateManager.changeGameState(GAME_STATE::MENU);
+		return;
+	}
 }
 
 void TitleScreen::destroy()
