@@ -4,9 +4,6 @@
     <ClCompile Include="..\src\Game.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Grid.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -37,23 +34,22 @@
     <ClCompile Include="..\src\Writer.cpp">
       <Filter>src\GENERAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\ConfigManager.cpp">
-      <Filter>src\GENERAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Entity.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Menu.cpp">
-      <Filter>src\STATES</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Button.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\SoundManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\WinScreen.cpp">
-      <Filter>src\STATES</Filter>
+    <ClCompile Include="..\src\Menu.cpp" />
+    <ClCompile Include="..\src\WinScreen.cpp" />
+    <ClCompile Include="..\src\Grid.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Entity.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ConfigManager.cpp">
+      <Filter>src\GENERAL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -67,9 +63,6 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Game.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Grid.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\include\defines.h">
@@ -93,23 +86,22 @@
     <ClInclude Include="..\include\Writer.h">
       <Filter>include\GENERAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\ConfigManager.h">
-      <Filter>include\GENERAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Entity.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Menu.h">
-      <Filter>include\STATES</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Button.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\include\SoundManager.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\WinScreen.h">
-      <Filter>include\STATES</Filter>
+    <ClInclude Include="..\include\Menu.h" />
+    <ClInclude Include="..\include\WinScreen.h" />
+    <ClInclude Include="..\include\Grid.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Entity.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ConfigManager.h">
+      <Filter>include\GENERAL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
