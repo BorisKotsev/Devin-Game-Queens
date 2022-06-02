@@ -10,6 +10,7 @@ public:
 
 	Game();
 	~Game();
+
 	void init();
 	void destroy();
 	void run();
