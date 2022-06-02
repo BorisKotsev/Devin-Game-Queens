@@ -44,6 +44,7 @@ void Menu::run()
 
 	m_exitBtn->update();
 	m_exitBtn->draw();
+	
 	if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_playBtn->getRect()) && world.m_inputManager.m_mouseIsPressed)
 	{
 		world.m_stateManager.changeGameState(GAME_STATE::GAME);
