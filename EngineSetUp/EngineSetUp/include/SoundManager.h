@@ -12,11 +12,9 @@ public:
 	~SoundManager();
 	
 	void init();
-	void playSound(string sound);
+	void playSound(SOUND sound);
 	void destroy();
 	
 private:
-	string _backgroundStr;
-
 	Mix_Chunk* m_backgroundMusic;
 };

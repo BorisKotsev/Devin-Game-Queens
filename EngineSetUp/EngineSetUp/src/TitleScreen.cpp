@@ -69,7 +69,4 @@ void TitleScreen::changeOpacity()
 		m_titleScreenText.changePerFrame *= -1;
 		m_titleScreenText.opacity = 50;
 	}
-	
-	D(m_titleScreenText.opacity);
-	D(m_titleScreenText.changePerFrame);
 }

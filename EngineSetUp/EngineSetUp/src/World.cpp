@@ -13,7 +13,9 @@ void World::init()
 {
 	m_presenter.init();
 
-	m_stateManager.init(GAME_STATE::TITLE_SCREEN);
+	m_stateManager.init(GAME_STATE::WIN_SCREEN);
+
+	m_soundManager.init();
 }
 
 void World::run()
