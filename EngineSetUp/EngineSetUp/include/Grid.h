@@ -19,12 +19,13 @@ class Grid
 public:
 
 	Grid();
+	Grid(const Grid* model);
 	~Grid();
 
-	void createByGridSquareSize(int2 coordinates,int2 dimensions,int borderThickness, int squareSize, SDL_Texture* borderTexture, SDL_Texture* squareTexture);
+	void load();
+
 	void update();
 	void draw();
-
 
 private:
 

@@ -25,7 +25,6 @@ public:
 	~ConfigManager();
 
 	void load();
-	void loadGrid();
 
 	GridModel m_gridModel;
 
