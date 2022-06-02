@@ -42,19 +42,7 @@ void WinScreen::init()
 }
 
 void WinScreen::run()
-{
-	if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_playBtn->getRect())
-		&& world.m_inputManager.m_mouseIsPressed)
-	{
-		world.m_stateManager.changeGameState(GAME_STATE::GAME);
-	}
-
-	if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_exitBtn->getRect())
-		&& world.m_inputManager.m_mouseIsPressed)
-	{
-		world.m_stateManager.changeGameState(GAME_STATE::NONE);
-	}
-	
+{	
 	drawObject(m_background);
 	
 	if (true)
@@ -71,6 +59,20 @@ void WinScreen::run()
 
 	m_exitBtn->update();
 	m_exitBtn->draw();
+	
+	if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_playBtn->getRect())
+		&& world.m_inputManager.m_mouseIsPressed)
+	{
+		world.m_stateManager.changeGameState(GAME_STATE::GAME);
+		return;
+	}
+
+	if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_exitBtn->getRect())
+		&& world.m_inputManager.m_mouseIsPressed)
+	{
+		world.m_stateManager.changeGameState(GAME_STATE::NONE);
+		return;
+	}
 }
 
 void WinScreen::destroy()
