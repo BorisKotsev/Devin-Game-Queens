@@ -155,6 +155,7 @@
     <ClCompile Include="..\src\State.cpp" />
     <ClCompile Include="..\src\StateManager.cpp" />
     <ClCompile Include="..\src\TitleScreen.cpp" />
+    <ClCompile Include="..\src\WinScreen.cpp" />
     <ClCompile Include="..\src\World.cpp" />
     <ClCompile Include="..\src\Writer.cpp" />
   </ItemGroup>
@@ -171,6 +172,7 @@
     <ClInclude Include="..\include\State.h" />
     <ClInclude Include="..\include\StateManager.h" />
     <ClInclude Include="..\include\TitleScreen.h" />
+    <ClInclude Include="..\include\WinScreen.h" />
     <ClInclude Include="..\include\World.h" />
     <ClInclude Include="..\include\Writer.h" />
   </ItemGroup>

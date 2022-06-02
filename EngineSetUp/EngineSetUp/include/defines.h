@@ -42,6 +42,7 @@ static string IN_GAME_BUTTONS_FOLDER = "InGameButtons\\";
 static string CONFIG_MANAGER_FOLDER = "configManager\\";
 static string SOUND_FOLDER = "music\\";
 static string TITLE_SCREEN_FOLDER = "titleScreen\\";
+static string WIN_SCREEN_FOLDER = "winScreen\\";
 
 struct int2
 {
@@ -205,6 +206,12 @@ enum class COLOR
     NONE = 0,
     LIGHT = 1,
     DARK = 2
+};
+
+enum class SOUND
+{
+	NONE = 0,
+	BACKGROUND = 1
 };
 
 struct Drawable
