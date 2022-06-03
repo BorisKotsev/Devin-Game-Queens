@@ -19,6 +19,7 @@ public:
 private: 
 	Drawable m_menu;
 
-	Button* m_playBtn;
+	Button* m_onePlayerBtn;
+	Button* m_twoPlayersBtn;
 	Button* m_exitBtn;
 };

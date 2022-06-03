@@ -47,11 +47,14 @@ void Grid::load()
 	m_possMove.texture = loadTexture("game\\gridPossMove.bmp");
 
 	m_gridBase.rect = { coordinates.x, coordinates.y, m_dimensions.x * squareSize, m_dimensions.y * squareSize };
+
 	m_gridBorder.rect = 
-	{	m_gridBase.rect.x - borderThickness, 
+	{	
+		m_gridBase.rect.x - borderThickness, 
 		m_gridBase.rect.y - borderThickness, 
 		m_gridBase.rect.w + 2 * borderThickness, 
-		m_gridBase.rect.h + 2 * borderThickness };
+		m_gridBase.rect.h + 2 * borderThickness 
+	};
 
 	m_gridSquares.resize(m_dimensions.x);
 	

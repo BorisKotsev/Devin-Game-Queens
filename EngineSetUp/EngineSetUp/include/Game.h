@@ -15,6 +15,7 @@ public:
 	void destroy();
 	void run();
 
+	int winCondition(bool winner);
 private:
 
 	ConfigManager m_config;

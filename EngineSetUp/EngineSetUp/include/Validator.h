@@ -9,8 +9,5 @@ public:
 	~Validator();
 
 	bool canMove(int2 coor);
-	
-private:
-	
-	
+	bool isNumber(string data);		
 };

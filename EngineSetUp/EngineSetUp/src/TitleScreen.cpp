@@ -1,7 +1,6 @@
 #include "TitleScreen.h"
 #include "World.h"
 
-
 extern World world;
 
 TitleScreen::TitleScreen()
@@ -24,7 +23,6 @@ void TitleScreen::init()
 
 	stream >> tmp >> m_titleScreenLogo.rect.x >> m_titleScreenLogo.rect.y >> m_titleScreenLogo.rect.w >> m_titleScreenLogo.rect.h;
 	stream >> tmp >> logo;
-	D(logo);
 	stream >> tmp >> m_titleScreenText.rect.x >> m_titleScreenText.rect.y >> m_titleScreenText.rect.w >> m_titleScreenText.rect.h;
 	stream >> tmp >> txt;
 	stream >> tmp >> m_titleScreenText.opacity;
