@@ -225,3 +225,8 @@ struct DrawableWithOpacity : public Drawable
     int opacity = 0;
     int changePerFrame = 0;
 };
+
+struct  gridSquare : Drawable
+{
+    bool isFree;
+};

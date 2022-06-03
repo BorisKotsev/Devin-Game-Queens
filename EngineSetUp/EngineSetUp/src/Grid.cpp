@@ -1,6 +1,7 @@
 #include "Grid.h"
 
 #include "World.h"
+
 extern World world;
 
 Grid::Grid()
@@ -27,8 +28,6 @@ Grid::~Grid()
 void Grid::load()
 {
 	int2 coordinates;
-	int squareSize;
-	int borderThickness;
 
 	string temp;
 	fstream stream;
@@ -36,9 +35,9 @@ void Grid::load()
 	stream.open(CONFIG_FOLDER + "game\\grid.txt");
 
 	stream >> temp >> coordinates.x >> coordinates.y;
-	stream >> temp >> m_dimensions.y >> m_dimensions.x;
-	stream >> temp >> squareSize;
-	stream >> temp >> borderThickness;
+	stream >> temp >> m_dimensions.x >> m_dimensions.y;
+	stream >> temp >> m_squareDimension;
+	stream >> temp >> m_borderThickness;
 
 	stream.close();
 
@@ -46,24 +45,25 @@ void Grid::load()
 	m_gridBase.texture = loadTexture("game\\gridSquareTexture.bmp");
 	m_possMove.texture = loadTexture("game\\gridPossMove.bmp");
 
-	m_gridBase.rect = { coordinates.x, coordinates.y, m_dimensions.x * squareSize, m_dimensions.y * squareSize };
-	m_gridBorder.rect = 
-	{	m_gridBase.rect.x - borderThickness, 
-		m_gridBase.rect.y - borderThickness, 
-		m_gridBase.rect.w + 2 * borderThickness, 
-		m_gridBase.rect.h + 2 * borderThickness };
+	m_gridBase.rect = { coordinates.x, coordinates.y, m_dimensions.y * m_squareDimension, m_dimensions.x * m_squareDimension };
 
-	m_gridSquares.resize(m_dimensions.x);
+	m_gridBorder.rect = 
+	{	m_gridBase.rect.x - m_borderThickness, 
+		m_gridBase.rect.y - m_borderThickness, 
+		m_gridBase.rect.w + 2 * m_borderThickness, 
+		m_gridBase.rect.h + 2 * m_borderThickness };
+
+	m_gridSquares.resize(m_dimensions.y);
 	
-	for (int r = 0; r < m_dimensions.x; r++)
+	for (int r = 0; r < m_dimensions.y; r++)
 	{
-		m_gridSquares[r].resize(m_dimensions.y);
+		m_gridSquares[r].resize(m_dimensions.x);
 		
-		for (int c = 0; c < m_dimensions.y; c++)
+		for (int c = 0; c < m_dimensions.x; c++)
 		{
 			m_gridSquares[r][c].isFree = true;
-			m_gridSquares[r][c].squareDrawable.rect = { r * squareSize + m_gridBase.rect.x, c * squareSize + m_gridBase.rect.y, squareSize, squareSize };
-			m_gridSquares[r][c].squareDrawable.texture = m_gridBase.texture;
+			m_gridSquares[r][c].rect = { r * m_squareDimension + m_gridBase.rect.x, c * m_squareDimension + m_gridBase.rect.y, m_squareDimension, m_squareDimension };
+			m_gridSquares[r][c].texture = m_gridBase.texture;
 		}
 	}
 }
@@ -72,15 +72,22 @@ void Grid::draw()
 {
 	drawObject(m_gridBorder);
 
-	for (int r = 0; r < m_dimensions.x; r++)
-	{
-		for (int c = 0; c < m_dimensions.y; c++)
-		{
-			drawObject(m_gridSquares[r][c].squareDrawable);
-		}
-	}
-	
+	drawGridSquares();
+
+	drawEntities();
+
 	drawPossibleMoves();
+}
+
+void Grid::addEntity(int2 gridSquareIndex)
+{
+	Entity* temp = new Entity(ConfigManager::m_enityModel, gridSquareIndex);
+	m_entities.push_back(temp);
+}
+
+int Grid::getSquareDimension()
+{
+	return m_squareDimension;
 }
 
 void Grid::checkForClick()
@@ -91,28 +98,74 @@ void Grid::checkForClick()
 		{
 			for (int c = 0; c < m_dimensions.y; c++)
 			{
-				if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_gridSquares[r][c].squareDrawable.rect))
+				if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_gridSquares[r][c].rect))
 				{
 					cout << "Clicked on " << r << " " << c << endl;
 				}
 			}
 		}
+		for (int i = 0; i < m_entities.size(); i++)
+		{
+			if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_entities[i]->getRect()))
+			{
+				m_currentEntity = m_entities[i];
+				m_lastEntityCoordinates = centerOfRect(m_entities[i]->getRect());
+			}
+		}
 	}
 }
 
-void Grid::checkForHold()
+void Grid::checkForDrag()
 {
-	if (world.m_inputManager.m_drag)
+	if (world.m_inputManager.m_drag && m_currentEntity != nullptr)
 	{
-		// we drag with the mouse
+		m_currentEntity->moveEntity(world.m_inputManager.m_mouseCoor);
 	}
 }
 
 void Grid::checkForRelease()
 {
-	if (world.m_inputManager.m_mouseOnRelease)
+
+	if (world.m_inputManager.m_mouseOnRelease && m_currentEntity != nullptr)
 	{
-		// we release the mouse
+		cout << "release";
+
+		for (int r = 0; r < m_gridSquares.size(); r++)
+		{
+			for (int c = 0; c < m_gridSquares[r].size(); c++)
+			{
+				if (MouseIsInRect(centerOfRect(m_currentEntity->getRect()), m_gridSquares[r][c].rect))
+				{
+					m_currentEntity->scaleToGridSquare(int2{ r, c });
+					m_currentEntity = nullptr;
+					return;
+				}
+			}
+		}
+
+		cout << "Invalid position!";
+		m_currentEntity->moveEntity(m_lastEntityCoordinates);
+		
+	}
+}
+
+void Grid::drawGridSquares()
+{
+	for (int r = 0; r < m_dimensions.x; r++)
+	{
+		for (int c = 0; c < m_dimensions.y; c++)
+		{
+			drawObject(m_gridSquares[r][c]);
+		}
+	}
+
+}
+
+void Grid::drawEntities()
+{
+	for (int i = 0; i < m_entities.size(); i++)
+	{
+		m_entities[i]->draw();
 	}
 }
 
@@ -120,7 +173,7 @@ void Grid::drawPossibleMoves()
 {
 	for(gridSquare* gs : m_possibleMoves)
 	{
-		m_possMove.rect = gs->squareDrawable.rect;
+		m_possMove.rect = gs->rect;
 		drawObject(m_possMove);
 	}
 }
@@ -142,7 +195,9 @@ void Grid::update()
 {
 	checkForClick();
 
-	checkForHold();
+	checkForDrag();
+
+	checkForRelease();
 
 	calcPossibleMoves();
 }

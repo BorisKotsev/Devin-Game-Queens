@@ -94,14 +94,14 @@
     </ClInclude>
     <ClInclude Include="..\include\Menu.h" />
     <ClInclude Include="..\include\WinScreen.h" />
-    <ClInclude Include="..\include\Grid.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Entity.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\include\ConfigManager.h">
       <Filter>include\GENERAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Grid.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

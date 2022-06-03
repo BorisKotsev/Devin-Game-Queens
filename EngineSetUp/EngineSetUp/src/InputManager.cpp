@@ -21,6 +21,7 @@ void startDrag(void* handleInput)
     InputManager* inputManager = (InputManager*)handleInput;
 
     inputManager->m_drag = true;
+    inputManager->m_mouseOnRelease = false;
 }
 
 void stopDrag(void* handleInput)
@@ -28,6 +29,7 @@ void stopDrag(void* handleInput)
     InputManager* inputManager = (InputManager*)handleInput;
 
     inputManager->m_drag = false;
+    inputManager->m_mouseOnRelease = true;
 }
 
 void InputManager::init(string path)
