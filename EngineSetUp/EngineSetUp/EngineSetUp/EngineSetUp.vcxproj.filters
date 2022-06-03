@@ -51,6 +51,12 @@
     <ClCompile Include="..\src\ConfigManager.cpp">
       <Filter>src\GENERAL</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\InputField.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\IFade.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\State.h">
@@ -102,6 +108,12 @@
     </ClInclude>
     <ClInclude Include="..\include\ConfigManager.h">
       <Filter>include\GENERAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\InputField.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\IFade.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

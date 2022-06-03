@@ -32,7 +32,7 @@ private:
 	Drawable m_gridBase;	// background of the grid
 	Drawable m_gridBorder;  // border of the grid 
 	Drawable m_possMove;	// possible to move square
-	Drawable m_hover;		// the drawable 
+	Drawable m_hover;		// the drawable for hovering
 
 	gridSquare* m_hoverGrid;// the grid that we hover on
 

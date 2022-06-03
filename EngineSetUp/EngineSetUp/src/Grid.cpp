@@ -129,7 +129,6 @@ void Grid::onHover()
 		{
 			if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_gridSquares[r][c].squareDrawable.rect))
 			{
-				D("HOVERED");
 				m_hoverGrid = &m_gridSquares[r][c];
 			}
 		}

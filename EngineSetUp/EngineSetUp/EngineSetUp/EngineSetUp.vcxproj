@@ -150,6 +150,8 @@
     <ClCompile Include="..\src\ErrorHandler.cpp" />
     <ClCompile Include="..\src\Game.cpp" />
     <ClCompile Include="..\src\Grid.cpp" />
+    <ClCompile Include="..\src\IFade.cpp" />
+    <ClCompile Include="..\src\InputField.cpp" />
     <ClCompile Include="..\src\InputManager.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Menu.cpp" />
@@ -171,6 +173,8 @@
     <ClInclude Include="..\include\Engine.h" />
     <ClInclude Include="..\include\ErrorHandler.h" />
     <ClInclude Include="..\include\Grid.h" />
+    <ClInclude Include="..\include\IFade.h" />
+    <ClInclude Include="..\include\InputField.h" />
     <ClInclude Include="..\include\InputManager.h" />
     <ClInclude Include="..\include\Menu.h" />
     <ClInclude Include="..\include\Presenter.h" />
