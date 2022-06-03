@@ -14,6 +14,7 @@ struct GridModel
 	SDL_Texture* borderTexture;
 	SDL_Texture* baseTexture;
 	SDL_Texture* squareTexture;
+	SDL_Texture* canMove;
 };
 
 class ConfigManager
@@ -24,7 +25,6 @@ public:
 	~ConfigManager();
 
 	void load();
-	void loadGrid();
 
 	GridModel m_gridModel;
 

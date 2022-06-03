@@ -19,17 +19,19 @@ class Grid
 public:
 
 	Grid();
+	Grid(const Grid* model);
 	~Grid();
 
-	void createByGridSquareSize(int2 coordinates,int2 dimensions,int borderThickness, int squareSize, SDL_Texture* borderTexture, SDL_Texture* squareTexture);
+	void load();
+
 	void update();
 	void draw();
-
 
 private:
 
 	Drawable m_gridBase;	// background of the grid
-	Drawable m_gridBorder;  // border of the grid
+	Drawable m_gridBorder;  // border of the grid 
+	Drawable m_possMove;	// possible to move square
 	
 	int2 m_dimensions;		// shows the number of squares a grid has
 	int2 m_squareDimension;	// shows what size the squares are
@@ -40,7 +42,12 @@ private:
 
 	vector<Entity> m_entities;
 
+	vector<gridSquare*> m_possibleMoves;
+
 	void checkForClick();
 	void checkForHold();
 	void checkForRelease();
+
+	void drawPossibleMoves();
+	void calcPossibleMoves();
 };
