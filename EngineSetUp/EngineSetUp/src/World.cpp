@@ -28,6 +28,11 @@ void World::run()
 // call destroy for all classes to prevent memory leak
 void World::destroy()
 {
+	m_soundManager.destroy();
+
+	SDL_DestroyRenderer(m_presenter.m_main_renderer);
+
+	SDL_DestroyWindow(m_presenter.m_main_window);
 }
 
 bool World::isRunning()

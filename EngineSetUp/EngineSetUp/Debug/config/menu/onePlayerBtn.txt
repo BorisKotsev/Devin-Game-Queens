@@ -1,0 +1,7 @@
+Path: OnePlayer.bmp
+
+Start_Rect: 200 800 615 160
+
+Max_Increase: 50
+
+Increase_Per_Frame: 5

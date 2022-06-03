@@ -29,7 +29,7 @@ void WinScreen::init()
 	stream >> tmp >> exitBtnPath;
 	
 	stream.close();
-	
+
 	m_background = loadTexture(WIN_SCREEN_FOLDER + background);
 	
 	m_winScreenPl2.rect = m_winScreenPl1.rect;
@@ -44,14 +44,17 @@ void WinScreen::init()
 void WinScreen::run()
 {	
 	drawObject(m_background);
-	
-	if (true)
+
+	switch (world.m_stateManager.m_game->winCondition(true))
 	{
+	case 1:
 		drawObject(m_winScreenPl1);
-	}
-	else
-	{
+		break;
+	case 0:
 		drawObject(m_winScreenPl2);
+		break;
+	case -1:
+		break;
 	}
 
 	m_playBtn->update();

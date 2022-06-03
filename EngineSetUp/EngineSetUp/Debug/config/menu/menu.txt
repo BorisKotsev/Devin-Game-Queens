@@ -2,6 +2,8 @@ Menu_Rect: 0 0 1920 1080
 
 Menu_Img: menu.bmp
 
-Btn_path: playBtn.txt
+One_Player_Btn: onePlayerBtn.txt
+
+Two_Players_Btn: twoPlayersBtn.txt
 
 Exit_path: exitBtn.txt

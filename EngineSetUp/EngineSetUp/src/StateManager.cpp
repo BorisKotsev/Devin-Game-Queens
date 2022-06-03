@@ -1,4 +1,7 @@
 #include "StateManager.h"
+#include "World.h"
+
+extern World world;
 
 StateManager::StateManager()
 {
@@ -25,6 +28,9 @@ void StateManager::initNewState()
 {
 	switch (m_gameState)
 	{
+	case GAME_STATE::NONE:
+		world.destroy();
+		break;
 	case GAME_STATE::GAME:
 		m_game = new Game();
 		m_currState = m_game;

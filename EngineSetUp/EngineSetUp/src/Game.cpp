@@ -29,3 +29,17 @@ void Game::run()
 	m_grid.draw();
 	m_inputField.draw();
 }
+
+int Game::winCondition(bool winner)
+{
+	if (winner)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+	
+	return -1;
+}
