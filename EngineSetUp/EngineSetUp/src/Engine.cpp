@@ -80,3 +80,8 @@ float lerp(float start, float target, float f)
 {
     return (start * (1.0f - f)) + (target * f);
 }
+
+int2 centerOfRect(SDL_Rect rect)
+{
+    return int2{ rect.x + rect.w / 2, rect.y + rect.h / 2 };
+}

@@ -2,6 +2,7 @@
 
 #include "defines.h"
 
+#include "Entity.h"
 #include "Presenter.h"
 
 struct GridModel
@@ -25,8 +26,10 @@ public:
 	~ConfigManager();
 
 	void load();
+	void loadEntity();
 
 	GridModel m_gridModel;
+	static Entity* m_enityModel;
 
 private:
 

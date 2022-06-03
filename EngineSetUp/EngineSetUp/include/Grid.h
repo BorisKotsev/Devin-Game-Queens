@@ -5,11 +5,6 @@
 #include <map>
 #include "Entity.h"
 
-struct gridSquare
-{
-	Drawable squareDrawable;
-	bool isFree;
-};
 
 /*
 \brief Grid structure splitting a place into gridded squares
@@ -22,10 +17,17 @@ public:
 	Grid(const Grid* model);
 	~Grid();
 
+	vector<vector<gridSquare>> m_gridSquares;
+
 	void load();
 
 	void update();
 	void draw();
+
+	void addEntity(int2 gridSquareIndex);
+
+	int getSquareDimension();
+
 
 private:
 	
@@ -37,22 +39,26 @@ private:
 	gridSquare* m_hoverGrid;// the grid that we hover on
 
 	int2 m_dimensions;		// shows the number of squares a grid has
-	int2 m_squareDimension;	// shows what size the squares are
+	int	 m_squareDimension;	// shows what size the squares are
 
 	int m_borderThickness;	// how thick is the border
 
-	vector<vector<gridSquare>> m_gridSquares;
 
-	vector<Entity> m_entities;
+	vector<Entity*> m_entities;
+	Entity* m_currentEntity = nullptr;
+	int2 m_lastEntityCoordinates;
 
 	vector<gridSquare*> m_possibleMoves;
 
+
 	void checkForClick();
-	void checkForHold();
+	void checkForDrag();
 	void checkForRelease();
 	void onHover();
 
 	void drawHover();
+	void drawGridSquares();
+	void drawEntities();
 	void drawPossibleMoves();
 	void calcPossibleMoves();
 };

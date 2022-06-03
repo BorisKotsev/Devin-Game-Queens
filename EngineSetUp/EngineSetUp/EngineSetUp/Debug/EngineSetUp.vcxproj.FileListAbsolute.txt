@@ -1,4 +1,3 @@
 C:\Users\UEFI\Documents\НПМГ\Nite Game Studio\EngineSetUp\EngineSetUp\EngineSetUp\EngineSetUp\Debug\EngineSetUp.exe
-C:\Users\konst\Documents\C++Programming\Nite\EngineSetUp\EngineSetUp\EngineSetUp\EngineSetUp\Debug\EngineSetUp.exe
 C:\Users\Boris\Documents\NPMG\Nite Game Studio\EngineSetUp\EngineSetUp\EngineSetUp\EngineSetUp\Debug\EngineSetUp.exe
 C:\Users\drago\Documents\NiTe\SetUp\EngineSetUp\EngineSetUp\EngineSetUp\Debug\EngineSetUp.exe

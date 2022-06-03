@@ -100,9 +100,6 @@
     </ClInclude>
     <ClInclude Include="..\include\Menu.h" />
     <ClInclude Include="..\include\WinScreen.h" />
-    <ClInclude Include="..\include\Grid.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Entity.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -113,6 +110,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\include\IFade.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Grid.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
