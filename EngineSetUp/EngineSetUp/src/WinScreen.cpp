@@ -66,14 +66,20 @@ void WinScreen::run()
 	if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_playBtn->getRect())
 		&& world.m_inputManager.m_mouseIsPressed)
 	{
+		world.m_soundManager.playSound(SOUND::BUTTON_CLICK);
+		
 		world.m_stateManager.changeGameState(GAME_STATE::GAME);
+
 		return;
 	}
 
 	if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_exitBtn->getRect())
 		&& world.m_inputManager.m_mouseIsPressed)
 	{
+		world.m_soundManager.playSound(SOUND::BUTTON_CLICK);
+
 		world.m_stateManager.changeGameState(GAME_STATE::NONE);
+		
 		return;
 	}
 }
