@@ -18,4 +18,5 @@ public:
 private:
 	Mix_Chunk* m_backgroundMusic;
 	Mix_Chunk* m_buttonClick;
+	Mix_Chunk* m_placeQueen;
 };

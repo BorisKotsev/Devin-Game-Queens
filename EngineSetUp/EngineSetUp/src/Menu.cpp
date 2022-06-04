@@ -112,12 +112,16 @@ void Menu::run()
 
 		if (m_popUp->m_easyBtn->m_isClicked)
 		{
+			world.m_soundManager.playSound(SOUND::BUTTON_CLICK);
+
 			world.m_stateManager.m_game->gameMode = -1;
 			world.m_stateManager.changeGameState(GAME_STATE::GAME);
 		}
 
 		if (m_popUp->m_hardBtn->m_isClicked)
 		{
+			world.m_soundManager.playSound(SOUND::BUTTON_CLICK);
+
 			world.m_stateManager.m_game->gameMode = -2;
 			world.m_stateManager.changeGameState(GAME_STATE::GAME);
 		}
@@ -161,7 +165,7 @@ void Menu::run()
 		if (m_rowsField.getValue() != "" && m_colsField.getValue() != ""
 			&& stoi(m_rowsField.getValue()) > 3 && stoi(m_colsField.getValue()) > 3)
 		{
-			world.m_stateManager.m_game->gameMode = 1;
+			world.m_stateManager.m_game->gameMode = 2;
 
 			world.m_stateManager.m_game->m_grid.m_dimensions.x = stoi(m_rowsField.getValue());
 			world.m_stateManager.m_game->m_grid.m_dimensions.y = stoi(m_colsField.getValue());

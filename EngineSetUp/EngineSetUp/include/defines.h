@@ -219,7 +219,8 @@ enum class SOUND
 {
 	NONE = 0,
 	BACKGROUND = 1,
-	BUTTON_CLICK = 2
+	BUTTON_CLICK = 2,
+	PLACE_QUEEN = 3
 };
 
 struct Drawable

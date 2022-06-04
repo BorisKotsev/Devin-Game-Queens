@@ -30,9 +30,11 @@ public:
 	void draw();
 
 	void addEntity(int2 coor, int onTurn);
-	
-	int getSquareDimension();
 	void winCondition();
+	
+	void destroy();
+
+	int getSquareDimension();
 
 private:
 	

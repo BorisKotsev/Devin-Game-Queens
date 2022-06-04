@@ -38,8 +38,7 @@ void Grid::load(int opponent)
 
 	stream.open(CONFIG_FOLDER + GAME_FOLDER + "grid.txt");
 
-	stream >> temp >> coordinates.x >> coordinates.y;
-	stream >> temp >> m_squareDimension;
+	stream >> temp >> coordinates.x;
 	stream >> temp >> m_borderThickness;
 
 	stream >> temp >> m_player1OnTurn.rect.x >> m_player1OnTurn.rect.y >> m_player1OnTurn.rect.w >> m_player1OnTurn.rect.h;
@@ -60,7 +59,17 @@ void Grid::load(int opponent)
 	m_oddSquareTexture = loadTexture(GAME_FOLDER + "gridOddSquareTexture.bmp");
 	m_evenSquareTexture = loadTexture(GAME_FOLDER + "gridEvenSquareTexture.bmp");
 
-	m_gridBase.rect = { coordinates.x, coordinates.y, m_dimensions.y * m_squareDimension, m_dimensions.x * m_squareDimension };
+	
+	int maxDim = max(m_dimensions.x, m_dimensions.y);
+
+	m_squareDimension = (1080 - m_borderThickness / 2)  / maxDim;
+
+	D(m_squareDimension);
+
+	coordinates.x = (1920 - m_dimensions.y * m_squareDimension) / 2;
+	coordinates.y = (1080 - m_dimensions.x * m_squareDimension) / 2;
+
+	m_gridBase.rect = { coordinates.x , coordinates.y, m_dimensions.y * m_squareDimension, m_dimensions.x * m_squareDimension };
 
 	m_gridBorder.rect = 
 	{	
@@ -106,8 +115,6 @@ void Grid::load(int opponent)
 			}
 		}
 	}
-	
-	cout << "GRID SIZE ROWS " << m_gridSquares.size() << " COLLS " << m_gridSquares[0].size();
 }
 
 void Grid::draw()
@@ -161,11 +168,12 @@ void Grid::addEntity(int2 coor, int onTurn)
 
 		for(int i = 0; i < buff.size(); i++)
 		{
-			cout << "r: " << buff[i].x << " c: " << buff[i].y << endl;
 			m_gridSquares[buff[i].x][buff[i].y].isFree = false;
 		}
 
 		m_onTurn = (m_onTurn == m_opponent) ? 1 : m_opponent;
+
+		world.m_soundManager.playSound(SOUND::PLACE_QUEEN);
 		
 	}
 	else
@@ -199,7 +207,20 @@ void Grid::winCondition()
 		res = (m_onTurn == m_opponent) ? 1 : m_opponent;
 		m_winner = res;
 		world.m_stateManager.changeGameState(GAME_STATE::WIN_SCREEN);
+		destroy();
 	}
+}
+
+void Grid::destroy()
+{
+	m_gridSquares.clear();
+
+	m_opponent = 0;
+	for (int i = 0; i < m_entities.size(); i++)
+	{
+		delete m_entities[i];
+	}
+	m_entities.clear();
 }
 
 void Grid::checkForClick()
