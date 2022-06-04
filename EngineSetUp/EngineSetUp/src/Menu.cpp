@@ -8,6 +8,7 @@ Menu::Menu()
 	m_onePlayerBtn = new Button();
 	m_twoPlayersBtn = new Button();
 	m_exitBtn = new Button();
+	m_popUp = nullptr;
 }
 
 Menu::~Menu()
@@ -40,7 +41,6 @@ void Menu::init()
 	stream.close();
 
 	m_menu.texture = loadTexture(MENU_FOLDER + menuImg);
-
 	m_rows.texture = loadTexture(MENU_FOLDER + rowsImg);
 	m_cols.texture = loadTexture(MENU_FOLDER + colsImg);
 	m_boardSize.texture = loadTexture(MENU_FOLDER + boardSizeImg);
@@ -51,6 +51,8 @@ void Menu::init()
 
 	m_rowsField.init(rowsPath, "");
 	m_colsField.init(colsPath, "");
+
+	m_isValid = false;
 }
 
 void Menu::run()
@@ -103,21 +105,40 @@ void Menu::run()
 	m_colsField.setText(m_colsField.getValue());
 	m_colsField.update();
 	m_colsField.draw();
+
+	if (m_popUp != nullptr && m_isValid)
+	{
+		m_popUp->run();
+
+		if (m_popUp->m_easyBtn->m_isClicked)
+		{
+			world.m_stateManager.m_game->gameMode = -1;
+			world.m_stateManager.changeGameState(GAME_STATE::GAME);
+		}
+
+		if (m_popUp->m_hardBtn->m_isClicked)
+		{
+			world.m_stateManager.m_game->gameMode = -2;
+			world.m_stateManager.changeGameState(GAME_STATE::GAME);
+		}
+	}
 	
 	if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_onePlayerBtn->getRect()) 
 		&& world.m_inputManager.m_mouseIsPressed)
 	{
 		world.m_soundManager.playSound(SOUND::BUTTON_CLICK);
 		
+		m_popUp = new PopUp();
+		
+		m_popUp->init();
+
 		if (m_rowsField.getValue() != "" && m_colsField.getValue() != "" 
 			&& stoi(m_rowsField.getValue()) > 3 && stoi(m_colsField.getValue()) > 3)
-		{
-			world.m_stateManager.m_game->gameMode = 1;
-			
+		{			
 			world.m_stateManager.m_game->m_grid.m_dimensions.x = stoi(m_rowsField.getValue());
 			world.m_stateManager.m_game->m_grid.m_dimensions.y = stoi(m_colsField.getValue());
-
-			world.m_stateManager.changeGameState(GAME_STATE::GAME);
+			
+			m_isValid = true;
 
 			return;
 		}	

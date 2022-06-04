@@ -39,6 +39,7 @@ static string SOUND_FOLDER = "music\\";
 static string TITLE_SCREEN_FOLDER = "titleScreen\\";
 static string WIN_SCREEN_FOLDER = "winScreen\\";
 static string GAME_FOLDER = "game\\";
+static string POP_UP_FOLDER = "popUp\\";
 
 struct int2
 {
