@@ -122,14 +122,14 @@ void Grid::draw()
 
 	drawHover();
 
-	if (m_onTurn == 1)
-	{
-		drawObject(m_player1OnTurn);
-	}
-	else if(m_onTurn == 2)
-	{
-		drawObject(m_player2OnTurn);
-	}
+	//if (m_onTurn == 1)
+	//{
+	//	drawObject(m_player1OnTurn);
+	//}
+	//else if(m_onTurn == 2)
+	//{
+	//	drawObject(m_player2OnTurn);
+	//}
 }
 /*
 * used when we want to add an entity
@@ -177,6 +177,29 @@ void Grid::addEntity(int2 coor, int onTurn)
 int Grid::getSquareDimension()
 {
 	return m_squareDimension;
+}
+
+void Grid::winCondition()
+{
+	int res = 1;
+
+	for (int r = 0; r < m_gridSquares.size(); r++)
+	{
+		for (int c = 0; c < m_gridSquares[r].size(); c++)
+		{
+			if (m_gridSquares[r][c].isFree)
+			{
+				res = 0;
+			}
+		}
+	}
+
+	if (res != 0)
+	{
+		res = (m_onTurn == m_opponent) ? 1 : m_opponent;
+		m_winner = res;
+		world.m_stateManager.changeGameState(GAME_STATE::WIN_SCREEN);
+	}
 }
 
 void Grid::checkForClick()
@@ -300,4 +323,6 @@ void Grid::update()
 	checkForClick();
 
 	calcUnavailableMoves();
+
+	winCondition();
 }

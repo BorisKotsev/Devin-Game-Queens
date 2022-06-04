@@ -48,12 +48,12 @@ void WinScreen::run()
 {	
 	drawObject(m_background);
 
-	switch (world.m_stateManager.m_game->winCondition(true))
+	switch (world.m_stateManager.m_game->m_grid.m_winner)
 	{
 	case 1:
 		drawObject(m_winScreenPl1);
 		break;
-	case 0:
+	case 2:
 		drawObject(m_winScreenPl2);
 		break;
 	case -1:

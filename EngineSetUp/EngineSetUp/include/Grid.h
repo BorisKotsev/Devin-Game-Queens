@@ -20,7 +20,8 @@ public:
 	~Grid();
 
 	int2 m_dimensions;		// shows the number of squares a grid has
-	
+	int m_winner = 0;		// shows the winner of the game
+
 	vector<vector<gridSquare>> m_gridSquares;
 
 	void load(int opponent);
@@ -31,6 +32,7 @@ public:
 	void addEntity(int2 coor, int onTurn);
 	
 	int getSquareDimension();
+	void winCondition();
 
 private:
 	

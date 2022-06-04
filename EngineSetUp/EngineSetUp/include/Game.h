@@ -13,15 +13,13 @@ public:
 
 	Game();
 	~Game();
-
+	
 	Grid m_grid;
 
 	void init();
 	void destroy();
 	void run();
 
-	int winCondition(bool winner);
-	
 private:
 	InputField m_inputField;
 };
