@@ -84,7 +84,10 @@ void InputManager::handleInput()
             }
             if (m_event.type == SDL_TEXTINPUT)
             {
-                m_textInput += m_event.text.text;
+                if (isNumber(m_event.text.text))
+                {
+                    m_textInput += m_event.text.text;
+                }
             }
             break;
         case SDL_KEYDOWN:

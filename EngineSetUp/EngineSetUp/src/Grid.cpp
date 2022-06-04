@@ -33,29 +33,30 @@ void Grid::load()
 	string temp;
 	fstream stream;
 
-	stream.open(CONFIG_FOLDER + "game\\grid.txt");
+	stream.open(CONFIG_FOLDER + GAME_FOLDER + "grid.txt");
 
 	stream >> temp >> coordinates.x >> coordinates.y;
-	stream >> temp >> m_dimensions.x >> m_dimensions.y;
 	stream >> temp >> m_squareDimension;
 	stream >> temp >> m_borderThickness;
 
 	stream.close();
+	
+	m_gridBorder.texture = loadTexture(GAME_FOLDER + "gridBorderTexture.bmp");
+	m_possMove.texture = loadTexture(GAME_FOLDER + "gridPossMove.bmp");
+	m_hover.texture = loadTexture(GAME_FOLDER + "gridPossMove.bmp");
 
-	m_gridBorder.texture = loadTexture("game\\gridBorderTexture.bmp");
-	m_possMove.texture = loadTexture("game\\gridPossMove.bmp");
-	m_hover.texture = loadTexture("game\\gridPossMove.bmp");
-
-	m_oddSquareTexture = loadTexture("game\\gridOddSquareTexture.bmp");
-	m_evenSquareTexture = loadTexture("game\\gridEvenSquareTexture.bmp");
+	m_oddSquareTexture = loadTexture(GAME_FOLDER + "gridOddSquareTexture.bmp");
+	m_evenSquareTexture = loadTexture(GAME_FOLDER + "gridEvenSquareTexture.bmp");
 
 	m_gridBase.rect = { coordinates.x, coordinates.y, m_dimensions.y * m_squareDimension, m_dimensions.x * m_squareDimension };
 
 	m_gridBorder.rect = 
-	{	m_gridBase.rect.x - m_borderThickness, 
+	{	
+		m_gridBase.rect.x - m_borderThickness, 
 		m_gridBase.rect.y - m_borderThickness, 
 		m_gridBase.rect.w + 2 * m_borderThickness, 
-		m_gridBase.rect.h + 2 * m_borderThickness };
+		m_gridBase.rect.h + 2 * m_borderThickness 
+	};
 
 	m_gridSquares.resize(m_dimensions.x);
 	

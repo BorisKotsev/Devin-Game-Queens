@@ -30,19 +30,15 @@ using namespace std;
 static string UI_FOLDER = "UI\\";
 static string MENU_FOLDER = "menu\\";
 static string MAIN_FOLDER = "main\\";
-static string ROOMS_FOLDER = "rooms\\";
 static string IMG_FOLDER = "img\\";
 static string CONFIG_FOLDER = "config\\";
 static string FONT_FOLDER = "ttf\\";
-static string DATABASE_FOLDER = "database\\";
-static string LOGIN_FOLDER = "login\\";
 static string VFX_FOLDER = "vfx\\";
-static string HUD_FOLDER = "hud\\";
-static string IN_GAME_BUTTONS_FOLDER = "InGameButtons\\";
 static string CONFIG_MANAGER_FOLDER = "configManager\\";
 static string SOUND_FOLDER = "music\\";
 static string TITLE_SCREEN_FOLDER = "titleScreen\\";
 static string WIN_SCREEN_FOLDER = "winScreen\\";
+static string GAME_FOLDER = "game\\";
 
 struct int2
 {
@@ -221,7 +217,8 @@ enum class COLOR
 enum class SOUND
 {
 	NONE = 0,
-	BACKGROUND = 1
+	BACKGROUND = 1,
+	BUTTON_CLICK = 2
 };
 
 struct Drawable

@@ -20,7 +20,7 @@ void StateManager::changeGameState(GAME_STATE _state)
 	destroyLastState();
 
 	m_gameState = _state;
-
+	
 	initNewState();
 }
 
@@ -32,7 +32,6 @@ void StateManager::initNewState()
 		world.destroy();
 		break;
 	case GAME_STATE::GAME:
-		m_game = new Game();
 		m_currState = m_game;
 		break;
 	case GAME_STATE::TITLE_SCREEN:
@@ -58,6 +57,8 @@ void StateManager::init(GAME_STATE _state)
 {
 	m_gameState = _state;
 
+	m_game = new Game();
+
 	initNewState();
 }
 
@@ -69,7 +70,7 @@ void StateManager::run()
 void StateManager::destroyLastState()
 {
 	m_currState->destroy();
-
+	
 	delete m_currState;
 	m_currState = nullptr;
 }

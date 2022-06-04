@@ -5,6 +5,7 @@
 #include "defines.h"
 #include "State.h"
 #include "Button.h"
+#include "InputField.h"
 
 class Menu : public State
 {
@@ -19,11 +20,14 @@ public:
 private: 
 	Drawable m_menu;
 
-	Button* m_onePlayerBtn;
-	Button* m_twoPlayersBtn;
-	Button* m_exitBtn;
-
 	Drawable m_rows;
 	Drawable m_cols;
 	Drawable m_boardSize;
+
+	Button* m_onePlayerBtn;
+	Button* m_twoPlayersBtn;
+	Button* m_exitBtn;
+	
+	InputField m_rowsField;
+	InputField m_colsField;
 };
