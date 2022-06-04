@@ -38,8 +38,7 @@ void Grid::load(int opponent)
 
 	stream.open(CONFIG_FOLDER + GAME_FOLDER + "grid.txt");
 
-	stream >> temp >> coordinates.x >> coordinates.y;
-	stream >> temp >> m_squareDimension;
+	stream >> temp >> coordinates.x;
 	stream >> temp >> m_borderThickness;
 
 	stream >> temp >> m_player1OnTurn.rect.x >> m_player1OnTurn.rect.y >> m_player1OnTurn.rect.w >> m_player1OnTurn.rect.h;
@@ -60,7 +59,17 @@ void Grid::load(int opponent)
 	m_oddSquareTexture = loadTexture(GAME_FOLDER + "gridOddSquareTexture.bmp");
 	m_evenSquareTexture = loadTexture(GAME_FOLDER + "gridEvenSquareTexture.bmp");
 
-	m_gridBase.rect = { coordinates.x, coordinates.y, m_dimensions.y * m_squareDimension, m_dimensions.x * m_squareDimension };
+	
+	int maxDim = max(m_dimensions.x, m_dimensions.y);
+
+	m_squareDimension = (1080 - m_borderThickness / 2)  / maxDim;
+
+	D(m_squareDimension);
+
+	coordinates.x = (1920 - m_dimensions.y * m_squareDimension) / 2;
+	coordinates.y = (1080 - m_dimensions.x * m_squareDimension) / 2;
+
+	m_gridBase.rect = { coordinates.x , coordinates.y, m_dimensions.y * m_squareDimension, m_dimensions.x * m_squareDimension };
 
 	m_gridBorder.rect = 
 	{	
