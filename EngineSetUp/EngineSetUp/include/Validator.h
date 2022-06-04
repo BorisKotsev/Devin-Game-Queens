@@ -2,12 +2,5 @@
 
 #include "defines.h"
 
-class Validator
-{
-public:
-	Validator();
-	~Validator();
-
-	bool canMove(int2 coor);
-	bool isNumber(string data);		
-};
+bool canMove(int2 coor);
+bool isNumber(string data);		

@@ -22,4 +22,8 @@ private:
 	Button* m_onePlayerBtn;
 	Button* m_twoPlayersBtn;
 	Button* m_exitBtn;
+
+	Drawable m_rows;
+	Drawable m_cols;
+	Drawable m_boardSize;
 };

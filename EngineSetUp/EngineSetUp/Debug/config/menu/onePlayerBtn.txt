@@ -1,6 +1,6 @@
-Path: OnePlayer.bmp
+Path: onePlayerBtn.bmp
 
-Start_Rect: 200 800 615 160
+Start_Rect: 192 803 615 160
 
 Max_Increase: 50
 

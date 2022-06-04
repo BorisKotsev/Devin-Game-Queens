@@ -19,19 +19,26 @@ void Menu::init()
 {
 	fstream stream;
 
-	string tmp, img, onePlayerBtn, twoPlayersBtn, exitPath;
+	string tmp, menuImg, onePlayerBtn, twoPlayersBtn, exitPath, rowsImg, colsImg;
 
 	stream.open(CONFIG_FOLDER + MENU_FOLDER + "menu.txt");
 	
 	stream >> tmp >> m_menu.rect.x >> m_menu.rect.y >> m_menu.rect.w >> m_menu.rect.h;
-	stream >> tmp >> img;
+	stream >> tmp >> menuImg;
 	stream >> tmp >> onePlayerBtn;
 	stream >> tmp >> twoPlayersBtn;
 	stream >> tmp >> exitPath;
+	stream >> tmp >> m_rows.rect.x >> m_rows.rect.y >> m_rows.rect.w >> m_rows.rect.h;
+	stream >> tmp >> rowsImg;
+	stream >> tmp >> m_cols.rect.x >> m_cols.rect.y >> m_cols.rect.w >> m_cols.rect.h;
+	stream >> tmp >> colsImg;
 
 	stream.close();
 
-	m_menu.texture = loadTexture(MENU_FOLDER + img);
+	m_menu.texture = loadTexture(MENU_FOLDER + menuImg);
+
+	m_rows.texture = loadTexture(MENU_FOLDER + rowsImg);
+	m_cols.texture = loadTexture(MENU_FOLDER + colsImg);
 
 	m_onePlayerBtn->init(onePlayerBtn, MENU_FOLDER);
 	m_twoPlayersBtn->init(twoPlayersBtn, MENU_FOLDER);
@@ -41,6 +48,9 @@ void Menu::init()
 void Menu::run()
 {
 	drawObject(m_menu);
+	
+	drawObject(m_rows);
+	drawObject(m_cols);
 	
 	m_onePlayerBtn->update();
 	m_onePlayerBtn->draw();

@@ -1,6 +1,6 @@
-Path: TwoPlayers.bmp
+Path: twoPlayersBtn.bmp
 
-Start_Rect: 1000 800 670 160
+Start_Rect: 1019 803 670 160
 
 Max_Increase: 50
 
