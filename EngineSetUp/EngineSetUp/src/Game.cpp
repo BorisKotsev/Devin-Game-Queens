@@ -28,12 +28,5 @@ void Game::run()
 	m_grid.draw();
 	//m_inputField.draw();
 
-	//if (true) // player on turn
-	//{
-	//	drawObject(m_player1OnTurn);
-	//}
-	//else
-	//{
-	//	drawObject(m_player2OnTurn);
-	//}
 }
+

@@ -158,6 +158,9 @@ void Grid::addEntity(int2 coor, int onTurn)
 		case -1:
 			temp = new Entity(ConfigManager::m_enityModelEnemy, coor, onTurn);
 			break;
+		case -2:
+			temp = new Entity(ConfigManager::m_enityModelEnemy, coor, onTurn);
+			break;
 		default:
 			break;
 		}
@@ -185,6 +188,127 @@ int Grid::getSquareDimension()
 {
 	return m_squareDimension;
 }
+
+int2 Grid::easyBot(vector<vector<gridSquare>> m_matrix)
+{
+	vector<int2> freeSquares;
+
+	for (int i = 0; i < m_matrix.size(); i++)
+	{
+		for (int j = 0; j < m_matrix[i].size(); j++)
+		{
+			if (m_matrix[i][j].isFree)
+			{
+				freeSquares.push_back(int2{i,j});
+			}
+		}
+	}
+	
+	int randomIndex = 0 + rand() % freeSquares.size();
+
+	return freeSquares[randomIndex];
+}
+
+int2 Grid::mediumBot(vector<vector<gridSquare>> matrix)
+{
+	// decide how many moves into the future to check
+	
+	vector<int2> possibleMoves;
+
+	for (int i = 0; i < matrix.size(); i++)
+	{
+		for (int j = 0; j < matrix[i].size(); j++)
+		{
+			if (matrix[i][j].isFree)
+			{
+				possibleMoves.push_back(int2{ i,j });
+			}
+		}
+	}
+
+	AI_move bestMove;
+	bestMove.efficiency = matrix.size() * matrix[0].size();
+
+	for (int i = 0; i < possibleMoves.size(); i++)
+	{
+		D(i);
+
+		vector <vector< gridSquare >> newMatrix;
+		newMatrix = matrix;
+
+		D(possibleMoves.size());
+
+		D(possibleMoves[i].x);
+		D(possibleMoves[i].y);
+		vector<int2> unavailable = giveUnavailableMoves(possibleMoves[i], matrix.size(), matrix[0].size());
+		D(unavailable.size());
+		int temp = matrix.size() * matrix[0].size() - unavailable.size();
+		
+		if (temp == matrix.size() * matrix[0].size())
+		{
+			return possibleMoves[i];
+		}
+
+		for (int j = 0; j < unavailable.size(); j++)
+		{
+			newMatrix[unavailable[j].x][unavailable[j].y].isFree = false;
+		}
+
+		if (checkForPossibleWin(newMatrix))
+		{
+			temp = matrix.size() * matrix[0].size();
+			D(temp);
+		}
+		else if (temp < bestMove.efficiency)
+		{
+			bestMove.coordinates = possibleMoves[i];
+			bestMove.efficiency = temp;
+			D(bestMove.efficiency);
+		}
+		D(i);
+	}
+	
+	D(bestMove.coordinates.x);
+	D(bestMove.coordinates.y);
+	return bestMove.coordinates;
+}
+
+bool Grid::checkForPossibleWin(vector<vector<gridSquare>> matrix)
+{
+	vector<int2> possibleMoves;
+
+	for (int i = 0; i < matrix.size(); i++)
+	{
+		for (int j = 0; j < matrix[i].size(); j++)
+		{
+			if (matrix[i][j].isFree)
+			{
+				possibleMoves.push_back(int2{ i,j });
+			}
+		}
+	}
+	D("checking for wincond");
+	D(possibleMoves.size());
+		
+	for (int l = 0; l < possibleMoves.size(); l++)
+	{
+		D(l);
+		D(possibleMoves[l].x);
+		D(possibleMoves[l].y);
+		vector<int2> unavailable = giveUnavailableMoves(possibleMoves[l], matrix.size(), matrix[0].size());
+		D(unavailable.size());
+
+		if (unavailable.size() == matrix.size() * matrix[0].size())
+		{
+			cout << "\npossible win in next move\n";
+			return true;
+		}
+	}
+	cout << "no win con here";
+	return false;
+}
+
+
 
 void Grid::winCondition()
 {
@@ -340,8 +464,20 @@ void Grid::update()
 {
 	onHover();
 
-	checkForClick();
-
+	if (m_onTurn == -1)
+	{
+		SDL_Delay(2000);
+		addEntity(easyBot(m_gridSquares), m_onTurn);
+	}
+	else if (m_onTurn == -2)
+	{
+		SDL_Delay(1000);
+		addEntity(mediumBot(m_gridSquares), m_onTurn);
+	}
+	else
+	{
+		checkForClick();
+	}
 	calcUnavailableMoves();
 
 	winCondition();

@@ -5,6 +5,14 @@
 #include "Entity.h"
 #include "Validator.h"
 #include <map>
+#include <limits>
+
+
+struct AI_move
+{
+	int2 coordinates;
+	int efficiency;
+};
 
 
 /*
@@ -36,6 +44,11 @@ public:
 
 	int getSquareDimension();
 
+	int2 easyBot(vector<vector<gridSquare>> matrix);			// returns the AI decision of coordinates to place the new entity
+	int2 mediumBot(vector<vector<gridSquare>> matrix);
+	
+	bool checkForPossibleWin(vector<vector<gridSquare>> matrix);
+	
 private:
 	
 	Drawable m_player1OnTurn;
