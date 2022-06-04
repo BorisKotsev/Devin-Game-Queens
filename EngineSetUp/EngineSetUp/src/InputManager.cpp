@@ -214,9 +214,13 @@ string InputManager::getTextInput()
     return m_textInput;
 }
 
-void InputManager::resetText()
+void InputManager::resetText(string reset)
 {
-    m_textInput = "";
+    if (reset == "0")
+    {
+        reset = "";
+    }
+    m_textInput = reset;
 }
 
 bool InputManager::anyKeyIsPressed()

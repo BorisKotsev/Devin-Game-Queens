@@ -1,6 +1,9 @@
 #include "ConfigManager.h"
 #include "World.h"
 
+Entity* ConfigManager::m_enityModelPlayer1 = nullptr;
+Entity* ConfigManager::m_enityModelPlayer2 = nullptr;
+Entity* ConfigManager::m_enityModelEnemy = nullptr;
 Entity* ConfigManager::m_enityModel = nullptr;
 Drawable* ConfigManager::m_invalidInputMsg = nullptr;
 
@@ -20,8 +23,12 @@ void ConfigManager::load()
 
 void ConfigManager::loadEntity()
 {
-	m_enityModel = new Entity();
-	m_enityModel->load("entity");
+	m_enityModelPlayer1 = new Entity();
+	m_enityModelPlayer1->load("player1");
+	m_enityModelPlayer2 = new Entity();
+	m_enityModelPlayer2->load("player2");
+	m_enityModelEnemy = new Entity();
+	m_enityModelEnemy->load("ai");
 }
 
 void ConfigManager::loadInvalidInputMsg()

@@ -52,7 +52,7 @@ public:
     void init(string path); //< read the pre-set controlls in a configFile 
     void startTextInput();
     void stopTextInput();
-    void resetText();
+    void resetText(string reset);
 
     bool anyKeyIsPressed();
 

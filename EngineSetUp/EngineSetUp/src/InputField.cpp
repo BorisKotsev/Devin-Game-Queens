@@ -114,6 +114,10 @@ void InputField::setWriter(Writer* writer)
 
 void InputField::setText(string text)
 {
+	if (text == "")
+	{
+		text = "0";
+	}
 	if (m_value != text)
 	{
 		auto res = m_writer->getText(text, FONT::ADVENT_PRO, COLOR::LIGHT, 30);

@@ -11,7 +11,7 @@ Entity::Entity()
 
 Entity::Entity(const Entity* model, int2 squareIndex, int team)
 {
-	
+
 	D(m_grid->getSquareDimension());
 
 	m_obj.rect.w = m_grid->getSquareDimension();
@@ -25,6 +25,8 @@ Entity::Entity(const Entity* model, int2 squareIndex, int team)
 	m_obj.texture = model->m_obj.texture;
 
 	m_team = team;
+
+	cout << "SUCCESSFULY PLACED A QUEEN ON ROW " << squareIndex.x << " COLL " << squareIndex.y << endl;
 }
 
 Entity::~Entity()
@@ -33,7 +35,7 @@ Entity::~Entity()
 
 void Entity::load(string entityName)
 {
-	m_obj.texture = loadTexture("game\\" + entityName + "Texture.bmp");
+	m_obj.texture = loadTexture("game\\" + entityName + ".bmp");
 
 }
 

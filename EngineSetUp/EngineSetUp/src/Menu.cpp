@@ -75,11 +75,11 @@ void Menu::run()
 		if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_rowsField.getRect()))
 		{
 			m_rowsField.readInput();
+			world.m_inputManager.resetText(m_rowsField.getValue());
 		}
 		else
 		{
 			m_rowsField.stopInput();
-			world.m_inputManager.resetText();
 		}
 	}
 
@@ -92,11 +92,11 @@ void Menu::run()
 		if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_colsField.getRect()))
 		{
 			m_colsField.readInput();
+			world.m_inputManager.resetText(m_colsField.getValue());
 		}
 		else
 		{
 			m_colsField.stopInput();
-			world.m_inputManager.resetText();
 		}
 	}
 
