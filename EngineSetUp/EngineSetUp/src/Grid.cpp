@@ -358,9 +358,9 @@ void Grid::winCondition()
 
 	if (res != 0)
 	{
-		res = (m_onTurn == m_opponent) ? 1 : m_opponent;
+		res = (m_onTurn == m_opponent) ? m_opponent : 1;
 		m_winner = res;
-		SDL_Delay(5000);
+		SDL_Delay(3000);
 		world.m_stateManager.changeGameState(GAME_STATE::WIN_SCREEN);
 		destroy();
 	}
