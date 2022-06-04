@@ -228,20 +228,14 @@ int2 Grid::mediumBot(vector<vector<gridSquare>> matrix)
 
 	AI_move bestMove;
 	bestMove.efficiency = matrix.size() * matrix[0].size();
+	bestMove.coordinates = possibleMoves[0];
 
 	for (int i = 0; i < possibleMoves.size(); i++)
 	{
-		D(i);
 
 		vector <vector< gridSquare >> newMatrix;
 		newMatrix = matrix;
-
-		D(possibleMoves.size());
-
-		D(possibleMoves[i].x);
-		D(possibleMoves[i].y);
 		vector<int2> unavailable = giveUnavailableMoves(possibleMoves[i], matrix.size(), matrix[0].size());
-		D(unavailable.size());
 		int temp = matrix.size() * matrix[0].size();
 
 		for (int j = 0; j < unavailable.size(); j++)
@@ -269,7 +263,6 @@ int2 Grid::mediumBot(vector<vector<gridSquare>> matrix)
 		if (checkForPossibleWin(newMatrix))
 		{
 			temp = matrix.size() * matrix[0].size();
-			D(temp);
 		}
 		else
 		{
@@ -280,13 +273,9 @@ int2 Grid::mediumBot(vector<vector<gridSquare>> matrix)
 		{
 			bestMove.coordinates = possibleMoves[i];
 			bestMove.efficiency = temp;
-			D(bestMove.efficiency);
 		}
-		D(i);
 	}
 	
-	D(bestMove.coordinates.x);
-	D(bestMove.coordinates.y);
 	return bestMove.coordinates;
 }
 
@@ -304,8 +293,6 @@ bool Grid::checkForPossibleWin(vector<vector<gridSquare>> matrix)
 			}
 		}
 	}
-	D("checking for wincond");
-	D(possibleMoves.size());
 		
 	vector<vector<gridSquare>>backup;
 	backup = matrix;
@@ -313,9 +300,6 @@ bool Grid::checkForPossibleWin(vector<vector<gridSquare>> matrix)
 	for (int l = 0; l < possibleMoves.size(); l++)
 	{
 		matrix = backup;
-		D(l);
-		D(possibleMoves[l].x);
-		D(possibleMoves[l].y);
 		vector<int2> unavailable = giveUnavailableMoves(possibleMoves[l], matrix.size(), matrix[0].size());
 
 		for (int i = 0; i < unavailable.size(); i++)
@@ -331,8 +315,6 @@ bool Grid::checkForPossibleWin(vector<vector<gridSquare>> matrix)
 			{
 				if (matrix[i][j].isFree)
 				{
-					D(i);
-					D(j);
 					freeSpots++;
 				}
 
@@ -341,13 +323,9 @@ bool Grid::checkForPossibleWin(vector<vector<gridSquare>> matrix)
 		
 		if (freeSpots == 0)
 		{
-			cout << "\npossible win in next move\n";
-			D(possibleMoves[l].x);
-			D(possibleMoves[l].y);
 			return true;
 		}
 	}
-	cout << "no win con here";
 	return false;
 }
 
@@ -372,6 +350,7 @@ void Grid::winCondition()
 	{
 		res = (m_onTurn == m_opponent) ? 1 : m_opponent;
 		m_winner = res;
+		SDL_Delay(5000);
 		world.m_stateManager.changeGameState(GAME_STATE::WIN_SCREEN);
 		destroy();
 	}
