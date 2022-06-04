@@ -44,7 +44,7 @@ void Game::run()
 	m_grid.draw();
 	//m_inputField.draw();
 
-	if (false) // player on turn
+	if () // player on turn
 	{
 		drawObject(m_player1OnTurn);
 	}
