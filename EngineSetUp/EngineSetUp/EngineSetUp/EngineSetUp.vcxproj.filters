@@ -64,6 +64,9 @@
     <ClCompile Include="..\src\IFade.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\PopUp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Button.h">
@@ -127,6 +130,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\include\InputField.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\PopUp.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

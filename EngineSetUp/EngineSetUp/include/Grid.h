@@ -38,9 +38,11 @@ public:
 	void draw();
 
 	void addEntity(int2 coor, int onTurn);
-	
-	int getSquareDimension();
 	void winCondition();
+	
+	void destroy();
+
+	int getSquareDimension();
 
 	int2 easyBot(vector<vector<gridSquare>> matrix);			// returns the AI decision of coordinates to place the new entity
 	int2 mediumBot(vector<vector<gridSquare>> matrix);

@@ -6,6 +6,7 @@
 #include "State.h"
 #include "Button.h"
 #include "InputField.h"
+#include "PopUp.h"
 
 class Menu : public State
 {
@@ -18,11 +19,14 @@ public:
 	void destroy();
 	
 private: 
-	Drawable m_menu;
 
+	bool m_isValid;
+	
+	Drawable m_menu;
 	Drawable m_rows;
 	Drawable m_cols;
 	Drawable m_boardSize;
+	
 	Drawable* m_invalidMsg;
 
 	Button* m_onePlayerBtn;
@@ -31,4 +35,7 @@ private:
 	
 	InputField m_rowsField;
 	InputField m_colsField;
+	InputField m_difficultyField;
+
+	PopUp* m_popUp;
 };

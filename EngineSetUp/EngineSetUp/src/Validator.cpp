@@ -33,9 +33,7 @@ vector<int2> giveUnavailableMoves(int2 coor, int rows, int colls)
 	
 	// curr place
 	unavailableMoves.push_back(coor);
-	
-	cout <<"KNIGHT" << endl;
-	
+		
 	for (int i = 0; i < 8; i++)
 	{
 		int2 buff = coor + directions[i];
@@ -45,8 +43,6 @@ vector<int2> giveUnavailableMoves(int2 coor, int rows, int colls)
 		}
 	}
 	
-	cout << "OTHER " <<endl;
-
 	// now is time for the bishop and rook moves
 	for (int i = 0; i < 8; i++)
 	{

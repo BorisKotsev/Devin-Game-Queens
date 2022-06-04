@@ -14,12 +14,13 @@ void SoundManager::init()
 {
 	fstream stream;
 
-	string tmp, background, btnClick;
+	string tmp, background, btnClick, queenPlaced;
 
 	stream.open(SOUND_FOLDER + "music.txt");
 
 	stream >> tmp >> background;
 	stream >> tmp >> btnClick;
+	stream >> tmp >> queenPlaced;
 	
 	stream.close();
 
@@ -30,13 +31,14 @@ void SoundManager::init()
 
 	m_backgroundMusic = Mix_LoadWAV((SOUND_FOLDER + background).c_str());
 	m_buttonClick = Mix_LoadWAV((SOUND_FOLDER + btnClick).c_str());
+	m_placeQueen = Mix_LoadWAV((SOUND_FOLDER + queenPlaced).c_str());
 
 	playSound(SOUND::BACKGROUND);
 }
 
 void SoundManager::playSound(SOUND sound)
 {
-	Mix_AllocateChannels(3);
+	Mix_AllocateChannels(4);
 
 	switch (sound)
 	{
@@ -47,6 +49,10 @@ void SoundManager::playSound(SOUND sound)
 	case SOUND::BUTTON_CLICK:
 		Mix_PlayChannel(2, m_buttonClick, 0);
 		Mix_Volume(2, 10);
+		break;
+	case SOUND::PLACE_QUEEN:
+		Mix_PlayChannel(3, m_placeQueen, 0);
+		Mix_Volume(3, 10);
 		break;
 	default:
 		break;
@@ -60,4 +66,7 @@ void SoundManager::destroy()
 
 	Mix_FreeChunk(m_buttonClick);
 	m_buttonClick = NULL;
+	
+	Mix_FreeChunk(m_placeQueen);
+	m_placeQueen = NULL;
 }
