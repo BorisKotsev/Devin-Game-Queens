@@ -33,7 +33,7 @@ void Grid::load(int opponent)
 
 	int2 coordinates;
 
-	string temp;
+	string temp , player1OnTurn, player2OnTurn;
 	fstream stream;
 
 	stream.open(CONFIG_FOLDER + GAME_FOLDER + "grid.txt");
@@ -42,7 +42,16 @@ void Grid::load(int opponent)
 	stream >> temp >> m_squareDimension;
 	stream >> temp >> m_borderThickness;
 
+	stream >> temp >> m_player1OnTurn.rect.x >> m_player1OnTurn.rect.y >> m_player1OnTurn.rect.w >> m_player1OnTurn.rect.h;
+	stream >> temp >> player1OnTurn >> player2OnTurn;
+	
 	stream.close();
+
+	m_player2OnTurn.rect = m_player1OnTurn.rect;
+
+	m_player1OnTurn.texture = loadTexture(GAME_FOLDER + player1OnTurn);
+	m_player2OnTurn.texture = loadTexture(GAME_FOLDER + player2OnTurn);
+	
 	
 	m_gridBorder.texture = loadTexture(GAME_FOLDER + "gridBorderTexture.bmp");
 	m_unavailableMove.texture = loadTexture(GAME_FOLDER + "unavailableTile.bmp");
@@ -112,6 +121,15 @@ void Grid::draw()
 	drawEntities();
 
 	drawHover();
+
+	//if (m_onTurn == 1)
+	//{
+	//	drawObject(m_player1OnTurn);
+	//}
+	//else if(m_onTurn == 2)
+	//{
+	//	drawObject(m_player2OnTurn);
+	//}
 }
 /*
 * used when we want to add an entity
@@ -163,7 +181,7 @@ int Grid::getSquareDimension()
 
 void Grid::winCondition()
 {
-	int res;
+	int res = 1;
 
 	for (int r = 0; r < m_gridSquares.size(); r++)
 	{
@@ -175,10 +193,10 @@ void Grid::winCondition()
 			}
 		}
 	}
-	res = (m_onTurn == m_opponent) ? 1 : m_opponent;
 
 	if (res != 0)
 	{
+		res = (m_onTurn == m_opponent) ? 1 : m_opponent;
 		m_winner = res;
 		world.m_stateManager.changeGameState(GAME_STATE::WIN_SCREEN);
 	}

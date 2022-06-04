@@ -20,4 +20,4 @@ Enter_Board_Size_Rect: 500 46 920 160
 
 Enter_Board_Size_Img: enterBoardSize.bmp
 
-Rows_Path: enterRows.txt enterCols.txt
+Rows_And_Cols_Path: enterRows.txt enterCols.txt
