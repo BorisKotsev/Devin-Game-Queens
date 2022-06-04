@@ -107,9 +107,9 @@ void Grid::draw()
 
 	drawGridSquares();
 
-	drawEntities();
-
 	drawUnavailableMoves();
+
+	drawEntities();
 
 	drawHover();
 }
@@ -140,16 +140,15 @@ void Grid::addEntity(int2 coor, int onTurn)
 		m_entities.push_back(temp);
 		
 		vector<int2> buff = giveUnavailableMoves(coor, m_dimensions.x, m_dimensions.y);
-	
-		D("start");
 
 		for(int i = 0; i < buff.size(); i++)
 		{
 			cout << "r: " << buff[i].x << " c: " << buff[i].y << endl;
 			m_gridSquares[buff[i].x][buff[i].y].isFree = false;
 		}
+
+		m_onTurn = (m_onTurn == m_opponent) ? 1 : m_opponent;
 		
-		D("end");
 	}
 	else
 	{
