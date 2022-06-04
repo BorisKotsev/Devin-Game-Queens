@@ -1,4 +1,4 @@
 coordinates: 600 100
-dimensions: 9 6
+dimensions: 5 6
 squareSize: 100
 borderThickness: 20

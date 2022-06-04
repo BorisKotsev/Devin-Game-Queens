@@ -57,16 +57,17 @@ void Grid::load()
 		m_gridBase.rect.w + 2 * m_borderThickness, 
 		m_gridBase.rect.h + 2 * m_borderThickness };
 
-	m_gridSquares.resize(m_dimensions.y);
+	m_gridSquares.resize(m_dimensions.x);
 	
+		
 	for (int r = 0; r < m_gridSquares.size(); r++)
 	{
-		m_gridSquares[r].resize(m_dimensions.x);
+		m_gridSquares[r].resize(m_dimensions.y);
 		
 		for (int c = 0; c < m_gridSquares[r].size(); c++)
 		{
 			m_gridSquares[r][c].isFree = true;
-			m_gridSquares[r][c].rect = { r * m_squareDimension + m_gridBase.rect.x, c * m_squareDimension + m_gridBase.rect.y, m_squareDimension, m_squareDimension };
+			m_gridSquares[r][c].rect = { c * m_squareDimension + m_gridBase.rect.x, r * m_squareDimension + m_gridBase.rect.y, m_squareDimension, m_squareDimension };
 			
 			if (r % 2 == 0)
 			{
@@ -92,6 +93,8 @@ void Grid::load()
 			}
 		}
 	}
+	
+	cout << "GRID SIZE ROWS " << m_gridSquares.size() << " COLLS " << m_gridSquares[0].size();
 }
 
 void Grid::draw()
@@ -102,15 +105,40 @@ void Grid::draw()
 
 	drawEntities();
 
-	//drawPossibleMoves();
+	drawUnavailableMoves();
 
 	drawHover();
 }
-
-void Grid::addEntity(int2 gridSquareIndex, int onTurn)
+/*
+* used when we want to add an entity
+* @param coor - where we want to add an entity (rows, colls)
+* @param onTurn - the curr player
+*/
+void Grid::addEntity(int2 coor, int onTurn)
 {
-	Entity* temp = new Entity(ConfigManager::m_enityModel, gridSquareIndex, onTurn);
-	m_entities.push_back(temp);
+	if (possMove(coor))
+	{
+		D(coor.x);
+		D(coor.y);
+		Entity* temp = new Entity(ConfigManager::m_enityModel, coor, onTurn);
+		m_entities.push_back(temp);
+		
+		vector<int2> buff = giveUnavailableMoves(coor, m_dimensions.x, m_dimensions.y);
+	
+		D("start");
+
+		for(int i = 0; i < buff.size(); i++)
+		{
+			cout << "r: " << buff[i].x << " c: " << buff[i].y << endl;
+			m_gridSquares[buff[i].x][buff[i].y].isFree = false;
+		}
+		
+		D("end");
+	}
+	else
+	{
+		cout << "Invalid move" << endl;
+	}
 }
 
 int Grid::getSquareDimension()
@@ -131,7 +159,7 @@ void Grid::checkForClick()
 					int2 coor;
 					coor.x = r;
 					coor.y = c;
-					
+
 					addEntity(coor, m_onTurn);
 				}
 			}
@@ -191,26 +219,45 @@ void Grid::drawHover()
 	}
 }
 
-void Grid::drawPossibleMoves()
+void Grid::drawUnavailableMoves()
 {
-	for(gridSquare* gs : m_possibleMoves)
+	for(gridSquare* gs : m_unavailableMoves)
 	{
 		m_possMove.rect = gs->rect;
 		drawObject(m_possMove);
 	}
 }
 
-void Grid::calcPossibleMoves()
+void Grid::calcUnavailableMoves()
 {
-	m_possibleMoves.clear();
+	m_unavailableMoves.clear();
 	for (int r = 0; r < m_gridSquares.size(); r++)
 	{
 		for (int c = 0; c < m_gridSquares[r].size(); c++)
 		{
-			// just some rand shit
-			if (c % 2 == 0 && r % 2 == 0) m_possibleMoves.push_back(&m_gridSquares[r][c]);
+			if (m_gridSquares[r][c].isFree == false)
+			{
+				m_unavailableMoves.push_back(&m_gridSquares[r][c]);
+			}
 		}
 	}
+}
+
+/*
+* check for valid move when we add entity
+* @param coor - the coordinates of the square we are checking
+* @return true if the square is free, false if it is not
+*/
+bool Grid::possMove(int2 coor)
+{
+	if (inGrid(coor, m_dimensions.x, m_dimensions.y))
+	{
+		if (m_gridSquares[coor.x][coor.y].isFree)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 void Grid::update()
@@ -219,5 +266,5 @@ void Grid::update()
 
 	checkForClick();
 
-	calcPossibleMoves();
+	calcUnavailableMoves();
 }

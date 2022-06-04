@@ -2,8 +2,9 @@
 
 #include "defines.h"
 #include "Presenter.h"
-#include <map>
 #include "Entity.h"
+#include "Validator.h"
+#include <map>
 
 
 /*
@@ -25,7 +26,7 @@ public:
 	void update();
 	void draw();
 
-	void addEntity(int2 gridSquareIndex, int onTurn);
+	void addEntity(int2 coor, int onTurn);
 	
 	int getSquareDimension();
 
@@ -52,7 +53,7 @@ private:
 	Entity* m_currentEntity = nullptr;
 	int2 m_lastEntityCoordinates;
 
-	vector<gridSquare*> m_possibleMoves;
+	vector<gridSquare*> m_unavailableMoves;
 
 	int m_onTurn; // 0 - none, pos number - player, neg number - enemy
 
@@ -62,6 +63,8 @@ private:
 	void drawHover();
 	void drawGridSquares();
 	void drawEntities();
-	void drawPossibleMoves();
-	void calcPossibleMoves();
+	void drawUnavailableMoves();
+	void calcUnavailableMoves();
+
+	bool possMove(int2 coor);
 };
