@@ -107,10 +107,11 @@ void Menu::run()
 	if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_onePlayerBtn->getRect()) 
 		&& world.m_inputManager.m_mouseIsPressed)
 	{
+		world.m_soundManager.playSound(SOUND::BUTTON_CLICK);
+		
 		if (m_rowsField.getValue() != "" && m_colsField.getValue() != "" 
 			&& stoi(m_rowsField.getValue()) > 3 && stoi(m_colsField.getValue()) > 3)
 		{
-			world.m_soundManager.playSound(SOUND::BUTTON_CLICK);
 
 			world.m_stateManager.m_game->m_grid.m_dimensions.x = stoi(m_rowsField.getValue());
 			world.m_stateManager.m_game->m_grid.m_dimensions.y = stoi(m_colsField.getValue());
@@ -123,8 +124,9 @@ void Menu::run()
 		{
 			m_invalidMsg = new Drawable();
 			
-				
-			drawObject(m_invalidMsg);
+			m_invalidMsg->rect = world.m_config.m_invalidInputMsg->rect;
+			m_invalidMsg->texture = world.m_config.m_invalidInputMsg->texture;
+							
 			return;
 		}
 	}
@@ -132,10 +134,11 @@ void Menu::run()
 	if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_twoPlayersBtn->getRect()) 
 		&& world.m_inputManager.m_mouseIsPressed)
 	{
+		world.m_soundManager.playSound(SOUND::BUTTON_CLICK);
+		
 		if (m_rowsField.getValue() != "" && m_colsField.getValue() != ""
 			&& stoi(m_rowsField.getValue()) > 3 && stoi(m_colsField.getValue()) > 3)
 		{
-			world.m_soundManager.playSound(SOUND::BUTTON_CLICK);
 
 			world.m_stateManager.m_game->m_grid.m_dimensions.x = stoi(m_rowsField.getValue());
 			world.m_stateManager.m_game->m_grid.m_dimensions.y = stoi(m_colsField.getValue());
@@ -146,9 +149,24 @@ void Menu::run()
 		}
 		else
 		{
-			drawObject(m_invalidMsg);
+			m_invalidMsg = new Drawable();
+
+			m_invalidMsg->rect = world.m_config.m_invalidInputMsg->rect;
+			m_invalidMsg->texture = world.m_config.m_invalidInputMsg->texture;
+			
 			return;
 		}
+	}
+
+	if (m_invalidMsg != nullptr)
+	{
+		drawObject(*m_invalidMsg);
+	}
+
+	if (world.m_inputManager.anyKeyIsPressed() || world.m_inputManager.m_mouseIsPressed)
+	{
+		delete m_invalidMsg;
+		m_invalidMsg = nullptr;
 	}
 
 	if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_exitBtn->getRect()) 

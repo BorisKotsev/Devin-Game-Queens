@@ -24,7 +24,4 @@ public:
 	
 private:
 	InputField m_inputField;
-
-	Drawable m_player1OnTurn;
-	Drawable m_player2OnTurn;
 };

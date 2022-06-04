@@ -34,6 +34,9 @@ public:
 
 private:
 	
+	Drawable m_player1OnTurn;
+	Drawable m_player2OnTurn;
+	
 	int m_opponent = 0;		// against who are we playing
 
 	Drawable m_gridBase;	// background of the grid
