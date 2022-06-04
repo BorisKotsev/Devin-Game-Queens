@@ -18,6 +18,8 @@ public:
 	Grid(const Grid* model);
 	~Grid();
 
+	int2 m_dimensions;		// shows the number of squares a grid has
+	
 	vector<vector<gridSquare>> m_gridSquares;
 
 	void load();
@@ -28,7 +30,6 @@ public:
 	void addEntity(int2 gridSquareIndex);
 
 	int getSquareDimension();
-
 
 private:
 	
@@ -42,11 +43,9 @@ private:
 
 	gridSquare* m_hoverGrid;// the grid that we hover on
 
-	int2 m_dimensions;		// shows the number of squares a grid has
 	int	 m_squareDimension;	// shows what size the squares are
 
 	int m_borderThickness;	// how thick is the border
-
 
 	vector<Entity*> m_entities;
 	Entity* m_currentEntity = nullptr;

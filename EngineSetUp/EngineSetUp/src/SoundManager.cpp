@@ -14,11 +14,12 @@ void SoundManager::init()
 {
 	fstream stream;
 
-	string tmp, background;
+	string tmp, background, btnClick;
 
 	stream.open(SOUND_FOLDER + "music.txt");
 
 	stream >> tmp >> background;
+	stream >> tmp >> btnClick;
 	
 	stream.close();
 
@@ -28,6 +29,7 @@ void SoundManager::init()
 	}
 
 	m_backgroundMusic = Mix_LoadWAV((SOUND_FOLDER + background).c_str());
+	m_buttonClick = Mix_LoadWAV((SOUND_FOLDER + btnClick).c_str());
 
 	playSound(SOUND::BACKGROUND);
 }
@@ -42,6 +44,9 @@ void SoundManager::playSound(SOUND sound)
 		Mix_PlayChannel(1, m_backgroundMusic, -1);
 		Mix_Volume(1, 10);
 		break;
+	case SOUND::BUTTON_CLICK:
+		Mix_PlayChannel(2, m_buttonClick, 1);
+		break;
 	default:
 		break;
 	}
@@ -51,4 +56,7 @@ void SoundManager::destroy()
 {
 	Mix_FreeChunk(m_backgroundMusic);
 	m_backgroundMusic = NULL;
+
+	Mix_FreeChunk(m_buttonClick);
+	m_buttonClick = NULL;
 }

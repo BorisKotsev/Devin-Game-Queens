@@ -66,8 +66,11 @@ void InputField::stopInput()
 }
 
 void InputField::update()
-{
-	setText(world.m_inputManager.getTextInput());
+{		
+	if (m_readInput)
+	{
+		setText(world.m_inputManager.getTextInput());
+	}
 
 	if (m_readInput || m_value.size() > 0)
 	{
