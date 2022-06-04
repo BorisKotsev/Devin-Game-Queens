@@ -36,7 +36,7 @@ private:
 	
 	Drawable m_gridBase;	// background of the grid
 	Drawable m_gridBorder;  // border of the grid 
-	Drawable m_possMove;	// possible to move square
+	Drawable m_unavailableMove;	// possible to move square
 	Drawable m_hover;		// the drawable for hovering
 
 	SDL_Texture* m_oddSquareTexture;

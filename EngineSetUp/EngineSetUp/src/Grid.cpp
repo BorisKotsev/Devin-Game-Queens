@@ -42,7 +42,7 @@ void Grid::load()
 	stream.close();
 	
 	m_gridBorder.texture = loadTexture(GAME_FOLDER + "gridBorderTexture.bmp");
-	m_possMove.texture = loadTexture(GAME_FOLDER + "gridPossMove.bmp");
+	m_unavailableMove.texture = loadTexture(GAME_FOLDER + "unavailableTile.bmp");
 	m_hover.texture = loadTexture(GAME_FOLDER + "gridPossMove.bmp");
 
 	m_oddSquareTexture = loadTexture(GAME_FOLDER + "gridOddSquareTexture.bmp");
@@ -224,8 +224,8 @@ void Grid::drawUnavailableMoves()
 {
 	for(gridSquare* gs : m_unavailableMoves)
 	{
-		m_possMove.rect = gs->rect;
-		drawObject(m_possMove);
+		m_unavailableMove.rect = gs->rect;
+		drawObject(m_unavailableMove);
 	}
 }
 
