@@ -112,7 +112,8 @@ void Menu::run()
 		if (m_rowsField.getValue() != "" && m_colsField.getValue() != "" 
 			&& stoi(m_rowsField.getValue()) > 3 && stoi(m_colsField.getValue()) > 3)
 		{
-
+			world.m_stateManager.m_game->gameMode = 1;
+			
 			world.m_stateManager.m_game->m_grid.m_dimensions.x = stoi(m_rowsField.getValue());
 			world.m_stateManager.m_game->m_grid.m_dimensions.y = stoi(m_colsField.getValue());
 
@@ -139,6 +140,7 @@ void Menu::run()
 		if (m_rowsField.getValue() != "" && m_colsField.getValue() != ""
 			&& stoi(m_rowsField.getValue()) > 3 && stoi(m_colsField.getValue()) > 3)
 		{
+			world.m_stateManager.m_game->gameMode = 1;
 
 			world.m_stateManager.m_game->m_grid.m_dimensions.x = stoi(m_rowsField.getValue());
 			world.m_stateManager.m_game->m_grid.m_dimensions.y = stoi(m_colsField.getValue());

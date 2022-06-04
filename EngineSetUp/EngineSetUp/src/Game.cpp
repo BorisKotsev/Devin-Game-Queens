@@ -10,7 +10,7 @@ Game::~Game()
 
 void Game::init()
 {
-	m_grid.load(2);
+	m_grid.load(gameMode);
 	Entity::m_grid = &m_grid;
 
 	m_inputField.init("enterName.txt", "");

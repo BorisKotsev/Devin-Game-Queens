@@ -14,6 +14,8 @@ public:
 	Game();
 	~Game();
 	
+	int gameMode;
+	
 	Grid m_grid;
 
 	void init();

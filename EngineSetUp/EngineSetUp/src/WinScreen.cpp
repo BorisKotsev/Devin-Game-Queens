@@ -56,8 +56,8 @@ void WinScreen::run()
 	case 2:
 		drawObject(m_winScreenPl2);
 		break;
-	case -1:
-		
+	default:
+		drawObject(m_winScreenEnemy);
 		break;
 	}
 
