@@ -18,7 +18,7 @@ void WinScreen::init()
 {
 	fstream stream;
 
-	string tmp, background, pl1, pl2, playBtnPath, exitBtnPath;
+	string tmp, background, pl1, pl2, playBtnPath, exitBtnPath, defeatImg;
 
 	stream.open(CONFIG_FOLDER + WIN_SCREEN_FOLDER + "winScreen.txt");
 
@@ -27,15 +27,18 @@ void WinScreen::init()
 	stream >> tmp >> pl1 >> pl2;
 	stream >> tmp >> playBtnPath;
 	stream >> tmp >> exitBtnPath;
+	stream >> tmp >> defeatImg;
 	
 	stream.close();
 
 	m_background = loadTexture(WIN_SCREEN_FOLDER + background);
 	
 	m_winScreenPl2.rect = m_winScreenPl1.rect;
+	m_winScreenEnemy.rect = m_winScreenPl1.rect;
 
 	m_winScreenPl1.texture = loadTexture(WIN_SCREEN_FOLDER + pl1);
 	m_winScreenPl2.texture = loadTexture(WIN_SCREEN_FOLDER + pl2);
+	m_winScreenEnemy.texture = loadTexture(WIN_SCREEN_FOLDER + defeatImg);
 
 	m_playBtn->init(playBtnPath, MENU_FOLDER);
 	m_exitBtn->init(exitBtnPath, MENU_FOLDER);
@@ -53,7 +56,8 @@ void WinScreen::run()
 	case 2:
 		drawObject(m_winScreenPl2);
 		break;
-	case -1:
+	default:
+		drawObject(m_winScreenEnemy);
 		break;
 	}
 
