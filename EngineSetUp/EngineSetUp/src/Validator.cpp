@@ -42,8 +42,6 @@ vector<int2> giveUnavailableMoves(int2 coor, int rows, int colls)
 		if (inGrid(buff, rows, colls))
 		{
 			unavailableMoves.push_back(buff);
-			D(buff.x);
-			D(buff.y);
 		}
 	}
 	
