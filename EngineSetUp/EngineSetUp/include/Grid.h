@@ -11,6 +11,7 @@
 */
 class Grid
 {
+
 public:
 
 	Grid();
@@ -35,6 +36,9 @@ private:
 	Drawable m_gridBorder;  // border of the grid 
 	Drawable m_possMove;	// possible to move square
 	Drawable m_hover;		// the drawable for hovering
+
+	SDL_Texture* m_oddSquareTexture;
+	SDL_Texture* m_evenSquareTexture;
 
 	gridSquare* m_hoverGrid;// the grid that we hover on
 
