@@ -15,6 +15,7 @@ void Game::init()
 	Entity::m_grid = &m_grid;
 
 	m_grid.addEntity(int2{ 0,0 });
+	m_inputField.init("enterName.txt", "");
 }
 
 void Game::destroy()
@@ -23,6 +24,22 @@ void Game::destroy()
 
 void Game::run()
 {
+	m_inputField.update();
 	m_grid.update();
 	m_grid.draw();
+	m_inputField.draw();
+}
+
+int Game::winCondition(bool winner)
+{
+	if (winner)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+	
+	return -1;
 }

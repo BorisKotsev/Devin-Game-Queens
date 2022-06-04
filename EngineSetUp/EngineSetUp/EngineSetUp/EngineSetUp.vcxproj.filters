@@ -1,121 +1,141 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\src\Game.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\main.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\State.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\StateManager.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Engine.cpp">
-      <Filter>src\GENERAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\ErrorHandler.cpp">
-      <Filter>src\GENERAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\InputManager.cpp">
-      <Filter>src\GENERAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Presenter.cpp">
-      <Filter>src\GENERAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\TitleScreen.cpp">
-      <Filter>src\GENERAL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\World.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Writer.cpp">
-      <Filter>src\GENERAL</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Button.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\SoundManager.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Menu.cpp" />
-    <ClCompile Include="..\src\WinScreen.cpp" />
-    <ClCompile Include="..\src\Grid.cpp">
+    <ClCompile Include="..\src\Engine.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Entity.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\ErrorHandler.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Grid.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Presenter.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Validator.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\World.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Writer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WinScreen.cpp">
+      <Filter>src\STATE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TitleScreen.cpp">
+      <Filter>src\STATE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\State.cpp">
+      <Filter>src\STATE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Menu.cpp">
+      <Filter>src\STATE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Game.cpp">
+      <Filter>src\STATE</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\ConfigManager.cpp">
-      <Filter>src\GENERAL</Filter>
+      <Filter>src\MANAGERS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\InputManager.cpp">
+      <Filter>src\MANAGERS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SoundManager.cpp">
+      <Filter>src\MANAGERS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StateManager.cpp">
+      <Filter>src\MANAGERS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\State.h">
+    <ClInclude Include="..\include\Button.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\StateManager.h">
+    <ClInclude Include="..\include\defines.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Engine.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Entity.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ErrorHandler.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Grid.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Presenter.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Validator.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\include\World.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Game.h">
+    <ClInclude Include="..\include\Writer.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\defines.h">
-      <Filter>include\GENERAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Engine.h">
-      <Filter>include\GENERAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\ErrorHandler.h">
-      <Filter>include\GENERAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Presenter.h">
-      <Filter>include\GENERAL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\InputManager.h">
-      <Filter>include\GENERAL</Filter>
+    <ClInclude Include="..\include\WinScreen.h">
+      <Filter>include\STATE</Filter>
     </ClInclude>
     <ClInclude Include="..\include\TitleScreen.h">
-      <Filter>include\GENERAL</Filter>
+      <Filter>include\STATE</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Writer.h">
-      <Filter>include\GENERAL</Filter>
+    <ClInclude Include="..\include\State.h">
+      <Filter>include\STATE</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Button.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\include\Menu.h">
+      <Filter>include\STATE</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\SoundManager.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Menu.h" />
-    <ClInclude Include="..\include\WinScreen.h" />
-    <ClInclude Include="..\include\Entity.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\include\Game.h">
+      <Filter>include\STATE</Filter>
     </ClInclude>
     <ClInclude Include="..\include\ConfigManager.h">
-      <Filter>include\GENERAL</Filter>
+      <Filter>include\MANAGERS</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Grid.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\include\StateManager.h">
+      <Filter>include\MANAGERS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SoundManager.h">
+      <Filter>include\MANAGERS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\InputManager.h">
+      <Filter>include\MANAGERS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="include">
-      <UniqueIdentifier>{cf603777-b17d-4bd2-82f9-260b11fa879b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src">
-      <UniqueIdentifier>{cac4efe5-7a94-414d-90a4-d49462c5eec1}</UniqueIdentifier>
+      <UniqueIdentifier>{eeee1187-4c50-4ae4-ba69-ada37f562781}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\GENERAL">
-      <UniqueIdentifier>{835394a7-eeed-4792-8288-9a58c324df1a}</UniqueIdentifier>
+    <Filter Include="include">
+      <UniqueIdentifier>{bf03d074-2a90-45bf-98db-1e74b2a4e7d5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\GENERAL">
-      <UniqueIdentifier>{b48517c3-c8bb-4500-8fbb-91b7de2d2349}</UniqueIdentifier>
+    <Filter Include="include\STATE">
+      <UniqueIdentifier>{288febd4-6686-4f6d-a192-de8b7ff25165}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\STATE">
+      <UniqueIdentifier>{1f5e3c7d-ea89-488e-880f-2eae9d6c8cca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\MANAGERS">
+      <UniqueIdentifier>{b0275204-769f-45ba-a337-7dbcbe534e14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\MANAGERS">
+      <UniqueIdentifier>{e5405ea0-632d-40e0-ab5d-9e1d88f668d3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

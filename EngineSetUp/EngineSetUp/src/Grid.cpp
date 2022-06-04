@@ -6,6 +6,7 @@ extern World world;
 
 Grid::Grid()
 {
+	m_hoverGrid = nullptr;
 }
 
 Grid::Grid(const Grid* model)
@@ -44,6 +45,7 @@ void Grid::load()
 	m_gridBorder.texture = loadTexture("game\\gridBorderTexture.bmp");
 	m_gridBase.texture = loadTexture("game\\gridSquareTexture.bmp");
 	m_possMove.texture = loadTexture("game\\gridPossMove.bmp");
+	m_hover.texture = loadTexture("game\\gridPossMove.bmp");
 
 	m_gridBase.rect = { coordinates.x, coordinates.y, m_dimensions.y * m_squareDimension, m_dimensions.x * m_squareDimension };
 
@@ -77,6 +79,8 @@ void Grid::draw()
 	drawEntities();
 
 	drawPossibleMoves();
+
+	drawHover();
 }
 
 void Grid::addEntity(int2 gridSquareIndex)
@@ -121,7 +125,7 @@ void Grid::checkForDrag()
 	{
 		m_currentEntity->moveEntity(world.m_inputManager.m_mouseCoor);
 	}
-}
+}	
 
 void Grid::checkForRelease()
 {
@@ -169,6 +173,30 @@ void Grid::drawEntities()
 	}
 }
 
+void Grid::onHover()
+{
+	m_hoverGrid = nullptr;
+	for (int r = 0; r < m_dimensions.x; r++)
+	{
+		for (int c = 0; c < m_dimensions.y; c++)
+		{
+			if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_gridSquares[r][c].rect))
+			{
+				m_hoverGrid = &m_gridSquares[r][c];
+			}
+		}
+	}
+}
+
+void Grid::drawHover()
+{
+	if (m_hoverGrid != nullptr)
+	{
+		m_hover.rect = m_hoverGrid->rect;
+		drawObject(m_hover);
+	}
+}
+
 void Grid::drawPossibleMoves()
 {
 	for(gridSquare* gs : m_possibleMoves)
@@ -193,6 +221,8 @@ void Grid::calcPossibleMoves()
 
 void Grid::update()
 {
+	onHover();
+
 	checkForClick();
 
 	checkForDrag();

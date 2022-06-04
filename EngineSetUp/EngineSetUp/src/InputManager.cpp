@@ -75,8 +75,30 @@ void InputManager::handleInput()
 			stopDrag(this);
 
 			break;
+        case SDL_TEXTINPUT:
+            
+            if (m_event.type == SDL_KEYDOWN && m_event.key.keysym.sym == SDLK_BACKSPACE && m_textInput.length() > 0)
+            {
+                m_textInput = m_textInput.substr(0, m_textInput.length() - 1);
+            }
+            if (m_event.type == SDL_TEXTINPUT)
+            {
+                m_textInput += m_event.text.text;
+            }
+            break;
+        case SDL_KEYDOWN:
+            if (m_event.type == SDL_KEYDOWN && m_event.key.keysym.sym == SDLK_BACKSPACE && m_textInput.length() > 0)
+            {
+                m_textInput = m_textInput.substr(0, m_textInput.length() - 1);
+            }
+            if (m_event.type == SDL_TEXTINPUT)
+            {
+                m_textInput += m_event.text.text;
+            }
+            break;
         }
     }
+
     SDL_StartTextInput();
 
     m_keyboardState = SDL_GetKeyboardState(NULL);
@@ -95,27 +117,17 @@ void InputManager::handleInput()
 
     m_event.wheel = SDL_MouseWheelEvent();
 
-    if (m_textInputIsActive)
-    {
-        if (m_event.type == SDL_TEXTINPUT || m_event.type == SDL_KEYDOWN)
-        {
-            if (m_event.type == SDL_KEYDOWN && m_event.key.keysym.sym == SDLK_BACKSPACE && m_textInput.length() > 0)
-            {
-                m_textInput = m_textInput.substr(0, m_textInput.length() - 1);
-            }
-            if (m_event.type == SDL_TEXTINPUT)
-            {
-                m_textInput += m_event.text.text;
-            }
-        }
-    }
-    else
-    {
-        if (m_keyboardState != NULL) //DELAY MUST BE ADDED
-        {
-            
-        }
-    }
+    //if (m_textInputIsActive)
+    //{
+
+    //}
+    //else
+    //{
+    //    if (m_keyboardState != NULL) //DELAY MUST BE ADDED
+    //    {
+    //        
+    //    }
+    //}
 
     if (m_mouseIsPressed)
     {
@@ -200,7 +212,7 @@ void InputManager::resetText()
     m_textInput = "";
 }
 
-bool InputManager::anyKeyIsPressed() //@Kosio
+bool InputManager::anyKeyIsPressed()
 {
     int numOfKeys = 322;
 	

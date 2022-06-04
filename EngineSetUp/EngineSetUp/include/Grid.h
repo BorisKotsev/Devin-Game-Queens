@@ -30,11 +30,14 @@ public:
 
 
 private:
-
+	
 	Drawable m_gridBase;	// background of the grid
 	Drawable m_gridBorder;  // border of the grid 
 	Drawable m_possMove;	// possible to move square
-	
+	Drawable m_hover;		// the drawable for hovering
+
+	gridSquare* m_hoverGrid;// the grid that we hover on
+
 	int2 m_dimensions;		// shows the number of squares a grid has
 	int	 m_squareDimension;	// shows what size the squares are
 
@@ -51,7 +54,9 @@ private:
 	void checkForClick();
 	void checkForDrag();
 	void checkForRelease();
+	void onHover();
 
+	void drawHover();
 	void drawGridSquares();
 	void drawEntities();
 	void drawPossibleMoves();
