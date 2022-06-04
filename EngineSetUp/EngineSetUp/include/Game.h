@@ -24,7 +24,6 @@ public:
 	
 private:
 	InputField m_inputField;
-	ConfigManager m_config;
 
 	Drawable m_player1OnTurn;
 	Drawable m_player2OnTurn;

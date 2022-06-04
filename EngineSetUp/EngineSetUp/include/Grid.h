@@ -30,7 +30,7 @@ public:
 	
 	vector<vector<gridSquare>> m_gridSquares;
 
-	void load();
+	void load(int opponent);
 
 	void update();
 	void draw();
@@ -46,6 +46,8 @@ public:
 	
 private:
 	
+	int m_opponent = 0;		// against who are we playing
+
 	Drawable m_gridBase;	// background of the grid
 	Drawable m_gridBorder;  // border of the grid 
 	Drawable m_unavailableMove;	// possible to move square
