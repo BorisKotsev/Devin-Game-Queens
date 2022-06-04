@@ -24,8 +24,8 @@ public:
 	void update();
 	void draw();
 
-	void addEntity(int2 gridSquareIndex);
-
+	void addEntity(int2 gridSquareIndex, int onTurn);
+	
 	int getSquareDimension();
 
 
@@ -50,10 +50,9 @@ private:
 
 	vector<gridSquare*> m_possibleMoves;
 
+	int m_onTurn; // 0 - none, pos number - player, neg number - enemy
 
 	void checkForClick();
-	void checkForDrag();
-	void checkForRelease();
 	void onHover();
 
 	void drawHover();

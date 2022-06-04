@@ -83,9 +83,9 @@ void Grid::draw()
 	drawHover();
 }
 
-void Grid::addEntity(int2 gridSquareIndex)
+void Grid::addEntity(int2 gridSquareIndex, int onTurn)
 {
-	Entity* temp = new Entity(ConfigManager::m_enityModel, gridSquareIndex);
+	Entity* temp = new Entity(ConfigManager::m_enityModel, gridSquareIndex, onTurn);
 	m_entities.push_back(temp);
 }
 
@@ -104,7 +104,11 @@ void Grid::checkForClick()
 			{
 				if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_gridSquares[r][c].rect))
 				{
-					cout << "Clicked on " << r << " " << c << endl;
+					int2 coor;
+					coor.x = r;
+					coor.y = c;
+					
+					addEntity(coor, m_onTurn);
 				}
 			}
 		}
@@ -116,40 +120,6 @@ void Grid::checkForClick()
 				m_lastEntityCoordinates = centerOfRect(m_entities[i]->getRect());
 			}
 		}
-	}
-}
-
-void Grid::checkForDrag()
-{
-	if (world.m_inputManager.m_drag && m_currentEntity != nullptr)
-	{
-		m_currentEntity->moveEntity(world.m_inputManager.m_mouseCoor);
-	}
-}	
-
-void Grid::checkForRelease()
-{
-
-	if (world.m_inputManager.m_mouseOnRelease && m_currentEntity != nullptr)
-	{
-		cout << "release";
-
-		for (int r = 0; r < m_gridSquares.size(); r++)
-		{
-			for (int c = 0; c < m_gridSquares[r].size(); c++)
-			{
-				if (MouseIsInRect(centerOfRect(m_currentEntity->getRect()), m_gridSquares[r][c].rect))
-				{
-					m_currentEntity->scaleToGridSquare(int2{ r, c });
-					m_currentEntity = nullptr;
-					return;
-				}
-			}
-		}
-
-		cout << "Invalid position!";
-		m_currentEntity->moveEntity(m_lastEntityCoordinates);
-		
 	}
 }
 
@@ -224,10 +194,6 @@ void Grid::update()
 	onHover();
 
 	checkForClick();
-
-	checkForDrag();
-
-	checkForRelease();
 
 	calcPossibleMoves();
 }

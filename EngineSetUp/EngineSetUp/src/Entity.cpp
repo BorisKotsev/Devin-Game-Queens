@@ -6,9 +6,10 @@ Grid* Entity::m_grid = nullptr;
 
 Entity::Entity()
 {
+	m_team = 0; // unasigned at the begining
 }
 
-Entity::Entity(const Entity* model, int2 squareIndex)
+Entity::Entity(const Entity* model, int2 squareIndex, int team)
 {
 	
 	D(m_grid->getSquareDimension());
@@ -22,7 +23,8 @@ Entity::Entity(const Entity* model, int2 squareIndex)
 	m_taken = &model->m_grid->m_gridSquares[squareIndex.x][squareIndex.y];
 
 	m_obj.texture = model->m_obj.texture;
-	
+
+	m_team = team;
 }
 
 Entity::~Entity()
@@ -58,4 +60,12 @@ void Entity::draw()
 SDL_Rect Entity::getRect()
 {
 	return m_obj.rect;
+}
+
+/*
+* @param _team - the team that we want to check
+*/
+bool Entity::isFromTeam(int _team)
+{
+	return m_team == _team;
 }
