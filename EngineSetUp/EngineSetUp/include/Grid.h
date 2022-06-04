@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include "Validator.h"
 #include <map>
+#include <limits>
 
 
 struct AI_move
@@ -27,7 +28,8 @@ public:
 	~Grid();
 
 	int2 m_dimensions;		// shows the number of squares a grid has
-	
+	int m_winner = 0;		// shows the winner of the game
+
 	vector<vector<gridSquare>> m_gridSquares;
 
 	void load(int opponent);
@@ -38,13 +40,17 @@ public:
 	void addEntity(int2 coor, int onTurn);
 	
 	int getSquareDimension();
+	void winCondition();
 
-	int2 easyBot(vector<vector<gridSquare>> m_matrix);			// returns the AI decision of coordinates to place the new entity
-	int2 mediumBot(vector<vector<gridSquare>> m_matrix);
-	AI_move playFutureMoves(vector<vector<gridSquare>> matrix, int movesIntoTheFuture, int isMyTurn);
-	void getFutureUnavailableMoves(vector<vector<gridSquare>> &matrix, int2 coor);
+	int2 easyBot(vector<vector<gridSquare>> matrix);			// returns the AI decision of coordinates to place the new entity
+	int2 mediumBot(vector<vector<gridSquare>> matrix);
+	
+	bool checkForPossibleWin(vector<vector<gridSquare>> matrix);
 	
 private:
+	
+	Drawable m_player1OnTurn;
+	Drawable m_player2OnTurn;
 	
 	int m_opponent = 0;		// against who are we playing
 

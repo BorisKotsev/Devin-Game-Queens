@@ -19,8 +19,9 @@ void Menu::init()
 {
 	fstream stream;
 
-	string tmp, menuImg, onePlayerBtn, twoPlayersBtn, exitPath, rowsImg, colsImg, boardSizeImg, rowsPath, colsPath;
-
+	string tmp, menuImg, onePlayerBtn, twoPlayersBtn, exitPath, rowsImg, colsImg,
+		boardSizeImg, rowsPath, colsPath;
+	
 	stream.open(CONFIG_FOLDER + MENU_FOLDER + "menu.txt");
 	
 	stream >> tmp >> m_menu.rect.x >> m_menu.rect.y >> m_menu.rect.w >> m_menu.rect.h;
@@ -107,26 +108,67 @@ void Menu::run()
 		&& world.m_inputManager.m_mouseIsPressed)
 	{
 		world.m_soundManager.playSound(SOUND::BUTTON_CLICK);
-
-		world.m_stateManager.m_game->m_grid.m_dimensions.x = stoi(m_rowsField.getValue());
-		world.m_stateManager.m_game->m_grid.m_dimensions.y = stoi(m_colsField.getValue());
 		
-		world.m_stateManager.changeGameState(GAME_STATE::GAME);
-	
-		return;
+		if (m_rowsField.getValue() != "" && m_colsField.getValue() != "" 
+			&& stoi(m_rowsField.getValue()) > 3 && stoi(m_colsField.getValue()) > 3)
+		{
+			world.m_stateManager.m_game->gameMode = -1;
+			
+			world.m_stateManager.m_game->m_grid.m_dimensions.x = stoi(m_rowsField.getValue());
+			world.m_stateManager.m_game->m_grid.m_dimensions.y = stoi(m_colsField.getValue());
+
+			world.m_stateManager.changeGameState(GAME_STATE::GAME);
+
+			return;
+		}	
+		else
+		{
+			m_invalidMsg = new Drawable();
+			
+			m_invalidMsg->rect = world.m_config.m_invalidInputMsg->rect;
+			m_invalidMsg->texture = world.m_config.m_invalidInputMsg->texture;
+							
+			return;
+		}
 	}
 
 	if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_twoPlayersBtn->getRect()) 
 		&& world.m_inputManager.m_mouseIsPressed)
 	{
 		world.m_soundManager.playSound(SOUND::BUTTON_CLICK);
+		
+		if (m_rowsField.getValue() != "" && m_colsField.getValue() != ""
+			&& stoi(m_rowsField.getValue()) > 3 && stoi(m_colsField.getValue()) > 3)
+		{
+			world.m_stateManager.m_game->gameMode = 1;
 
-		world.m_stateManager.m_game->m_grid.m_dimensions.x = stoi(m_rowsField.getValue());
-		world.m_stateManager.m_game->m_grid.m_dimensions.y = stoi(m_colsField.getValue());
-		
-		world.m_stateManager.changeGameState(GAME_STATE::GAME);
-		
-		return;
+			world.m_stateManager.m_game->m_grid.m_dimensions.x = stoi(m_rowsField.getValue());
+			world.m_stateManager.m_game->m_grid.m_dimensions.y = stoi(m_colsField.getValue());
+
+			world.m_stateManager.changeGameState(GAME_STATE::GAME);
+
+			return;
+		}
+		else
+		{
+			m_invalidMsg = new Drawable();
+
+			m_invalidMsg->rect = world.m_config.m_invalidInputMsg->rect;
+			m_invalidMsg->texture = world.m_config.m_invalidInputMsg->texture;
+			
+			return;
+		}
+	}
+
+	if (m_invalidMsg != nullptr)
+	{
+		drawObject(*m_invalidMsg);
+	}
+
+	if (world.m_inputManager.anyKeyIsPressed() || world.m_inputManager.m_mouseIsPressed)
+	{
+		delete m_invalidMsg;
+		m_invalidMsg = nullptr;
 	}
 
 	if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_exitBtn->getRect()) 
@@ -152,4 +194,5 @@ void Menu::destroy()
 	SDL_DestroyTexture(m_rows.texture);
 	SDL_DestroyTexture(m_cols.texture);
 	SDL_DestroyTexture(m_boardSize.texture);
+	SDL_DestroyTexture(m_invalidMsg->texture);
 }

@@ -157,8 +157,7 @@ void InputManager::handleInput()
 
     if (m_drag)
     {
-        D(m_mouseCoor.x);
-        D(m_mouseCoor.y);
+
     }
 }
 

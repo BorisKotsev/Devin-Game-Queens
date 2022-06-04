@@ -17,7 +17,7 @@ StateManager::~StateManager()
 
 void StateManager::changeGameState(GAME_STATE _state)
 {
-	destroyLastState();
+	//destroyLastState();
 
 	m_gameState = _state;
 	

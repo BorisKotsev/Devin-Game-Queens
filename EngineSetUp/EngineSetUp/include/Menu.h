@@ -23,6 +23,7 @@ private:
 	Drawable m_rows;
 	Drawable m_cols;
 	Drawable m_boardSize;
+	Drawable* m_invalidMsg;
 
 	Button* m_onePlayerBtn;
 	Button* m_twoPlayersBtn;

@@ -18,7 +18,7 @@ void WinScreen::init()
 {
 	fstream stream;
 
-	string tmp, background, pl1, pl2, playBtnPath, exitBtnPath;
+	string tmp, background, pl1, pl2, playBtnPath, exitBtnPath, defeatImg;
 
 	stream.open(CONFIG_FOLDER + WIN_SCREEN_FOLDER + "winScreen.txt");
 
@@ -27,15 +27,18 @@ void WinScreen::init()
 	stream >> tmp >> pl1 >> pl2;
 	stream >> tmp >> playBtnPath;
 	stream >> tmp >> exitBtnPath;
+	stream >> tmp >> defeatImg;
 	
 	stream.close();
 
 	m_background = loadTexture(WIN_SCREEN_FOLDER + background);
 	
 	m_winScreenPl2.rect = m_winScreenPl1.rect;
+	m_winScreenEnemy.rect = m_winScreenPl1.rect;
 
 	m_winScreenPl1.texture = loadTexture(WIN_SCREEN_FOLDER + pl1);
 	m_winScreenPl2.texture = loadTexture(WIN_SCREEN_FOLDER + pl2);
+	m_winScreenEnemy.texture = loadTexture(WIN_SCREEN_FOLDER + defeatImg);
 
 	m_playBtn->init(playBtnPath, MENU_FOLDER);
 	m_exitBtn->init(exitBtnPath, MENU_FOLDER);
@@ -45,15 +48,16 @@ void WinScreen::run()
 {	
 	drawObject(m_background);
 
-	switch (world.m_stateManager.m_game->winCondition(true))
+	switch (world.m_stateManager.m_game->m_grid.m_winner)
 	{
 	case 1:
 		drawObject(m_winScreenPl1);
 		break;
-	case 0:
+	case 2:
 		drawObject(m_winScreenPl2);
 		break;
-	case -1:
+	default:
+		drawObject(m_winScreenEnemy);
 		break;
 	}
 
@@ -66,14 +70,20 @@ void WinScreen::run()
 	if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_playBtn->getRect())
 		&& world.m_inputManager.m_mouseIsPressed)
 	{
+		world.m_soundManager.playSound(SOUND::BUTTON_CLICK);
+		
 		world.m_stateManager.changeGameState(GAME_STATE::GAME);
+
 		return;
 	}
 
 	if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_exitBtn->getRect())
 		&& world.m_inputManager.m_mouseIsPressed)
 	{
+		world.m_soundManager.playSound(SOUND::BUTTON_CLICK);
+
 		world.m_stateManager.changeGameState(GAME_STATE::NONE);
+		
 		return;
 	}
 }

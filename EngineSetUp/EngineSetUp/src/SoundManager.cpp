@@ -45,7 +45,8 @@ void SoundManager::playSound(SOUND sound)
 		Mix_Volume(1, 10);
 		break;
 	case SOUND::BUTTON_CLICK:
-		Mix_PlayChannel(2, m_buttonClick, 1);
+		Mix_PlayChannel(2, m_buttonClick, 0);
+		Mix_Volume(2, 10);
 		break;
 	default:
 		break;

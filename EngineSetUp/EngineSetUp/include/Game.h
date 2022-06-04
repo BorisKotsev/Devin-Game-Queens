@@ -13,18 +13,15 @@ public:
 
 	Game();
 	~Game();
-
+	
+	int gameMode;
+	
 	Grid m_grid;
 
 	void init();
 	void destroy();
 	void run();
 
-	int winCondition(bool winner);
-	
 private:
 	InputField m_inputField;
-
-	Drawable m_player1OnTurn;
-	Drawable m_player2OnTurn;
 };

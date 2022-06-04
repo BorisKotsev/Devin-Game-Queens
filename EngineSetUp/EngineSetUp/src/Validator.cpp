@@ -42,8 +42,6 @@ vector<int2> giveUnavailableMoves(int2 coor, int rows, int colls)
 		if (inGrid(buff, rows, colls))
 		{
 			unavailableMoves.push_back(buff);
-			D(buff.x);
-			D(buff.y);
 		}
 	}
 	
@@ -72,10 +70,8 @@ void lineMoves(int2 coor, int rows, int colls, int _dir, vector<int2>& out)
 
 	int2 curr = coor + offsetPerMove;	// the current square we are on
 	
-	cout << "DIRECTION " << _dir << endl;
 	while (inGrid(curr, rows, colls))
 	{
-		cout << "r: " << curr.x << " c: " << curr.y << endl;
 		out.push_back(curr);
 		curr = curr + offsetPerMove;
 	}
