@@ -161,6 +161,29 @@ int Grid::getSquareDimension()
 	return m_squareDimension;
 }
 
+void Grid::winCondition()
+{
+	int res;
+
+	for (int r = 0; r < m_gridSquares.size(); r++)
+	{
+		for (int c = 0; c < m_gridSquares[r].size(); c++)
+		{
+			if (m_gridSquares[r][c].isFree)
+			{
+				res = 0;
+			}
+		}
+	}
+	res = (m_onTurn == m_opponent) ? 1 : m_opponent;
+
+	if (res != 0)
+	{
+		m_winner = res;
+		world.m_stateManager.changeGameState(GAME_STATE::WIN_SCREEN);
+	}
+}
+
 void Grid::checkForClick()
 {
 	if (world.m_inputManager.m_mouseOnClick)
@@ -282,4 +305,6 @@ void Grid::update()
 	checkForClick();
 
 	calcUnavailableMoves();
+
+	winCondition();
 }

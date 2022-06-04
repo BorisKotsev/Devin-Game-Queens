@@ -44,26 +44,12 @@ void Game::run()
 	m_grid.draw();
 	//m_inputField.draw();
 
-	if () // player on turn
-	{
-		drawObject(m_player1OnTurn);
-	}
-	else
-	{
-		drawObject(m_player2OnTurn);
-	}
-}
-
-int Game::winCondition(bool winner)
-{
-	if (winner)
-	{
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}
-	
-	return -1;
+	//if (true) // player on turn
+	//{
+	//	drawObject(m_player1OnTurn);
+	//}
+	//else
+	//{
+	//	drawObject(m_player2OnTurn);
+	//}
 }
