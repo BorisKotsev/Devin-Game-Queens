@@ -47,7 +47,7 @@ void WinScreen::init()
 void WinScreen::run()
 {	
 	drawObject(m_background);
-
+	D(world.m_stateManager.m_game->m_grid.m_winner);
 	switch (world.m_stateManager.m_game->m_grid.m_winner)
 	{
 	case 1:

@@ -208,7 +208,20 @@ void Grid::winCondition()
 		res = (m_onTurn == m_opponent) ? 1 : m_opponent;
 		m_winner = res;
 		world.m_stateManager.changeGameState(GAME_STATE::WIN_SCREEN);
+		destroy();
 	}
+}
+
+void Grid::destroy()
+{
+	m_gridSquares.clear();
+
+	m_opponent = 0;
+	for (int i = 0; i < m_entities.size(); i++)
+	{
+		delete m_entities[i];
+	}
+	m_entities.clear();
 }
 
 void Grid::checkForClick()
