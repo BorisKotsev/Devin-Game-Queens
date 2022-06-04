@@ -24,10 +24,10 @@ void Game::destroy()
 
 void Game::run()
 {
-	m_inputField.update();
+	//m_inputField.update();
 	m_grid.update();
 	m_grid.draw();
-	m_inputField.draw();
+	//m_inputField.draw();
 }
 
 int Game::winCondition(bool winner)
