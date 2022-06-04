@@ -1,4 +1,4 @@
-backImage: entityTexture.bmp
+backImage: inputField.bmp
 
 forImage: gridPossMove.bmp
 
