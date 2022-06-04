@@ -127,14 +127,9 @@ void Grid::draw()
 	drawEntities();
 
 	drawHover();
-
+	
 	if (m_onTurn == 1)
 	{
-		D("HERE");
-		D(m_player1OnTurn.rect.x);
-		D(m_player1OnTurn.rect.y);
-		D(m_player1OnTurn.rect.w);
-		D(m_player1OnTurn.rect.h);
 		drawObject(m_player1OnTurn);
 	}
 	else if(m_onTurn == 2)

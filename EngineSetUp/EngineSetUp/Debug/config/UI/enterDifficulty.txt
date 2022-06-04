@@ -1,9 +1,0 @@
-backImage: entityTexture.bmp
-
-forImage: gridPossMove.bmp
-
-rect: 510 626 900 180
-
-textRect: 510 626 180
-
-opacityPerFrame: 50
