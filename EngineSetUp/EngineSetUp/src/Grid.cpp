@@ -114,8 +114,6 @@ void Grid::load(int opponent)
 			}
 		}
 	}
-	
-	cout << "GRID SIZE ROWS " << m_gridSquares.size() << " COLLS " << m_gridSquares[0].size();
 }
 
 void Grid::draw()
@@ -174,11 +172,12 @@ void Grid::addEntity(int2 coor, int onTurn)
 
 		for(int i = 0; i < buff.size(); i++)
 		{
-			cout << "r: " << buff[i].x << " c: " << buff[i].y << endl;
 			m_gridSquares[buff[i].x][buff[i].y].isFree = false;
 		}
 
 		m_onTurn = (m_onTurn == m_opponent) ? 1 : m_opponent;
+
+		world.m_soundManager.playSound(SOUND::PLACE_QUEEN);
 		
 	}
 	else
