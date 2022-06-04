@@ -38,7 +38,6 @@ void Grid::load(int opponent)
 
 	stream.open(CONFIG_FOLDER + GAME_FOLDER + "grid.txt");
 
-	stream >> temp >> coordinates.x;
 	stream >> temp >> m_borderThickness;
 
 	stream >> temp >> m_player1OnTurn.rect.x >> m_player1OnTurn.rect.y >> m_player1OnTurn.rect.w >> m_player1OnTurn.rect.h;
@@ -131,14 +130,19 @@ void Grid::draw()
 
 	drawHover();
 
-	//if (m_onTurn == 1)
-	//{
-	//	drawObject(m_player1OnTurn);
-	//}
-	//else if(m_onTurn == 2)
-	//{
-	//	drawObject(m_player2OnTurn);
-	//}
+	if (m_onTurn == 1)
+	{
+		D("HERE");
+		D(m_player1OnTurn.rect.x);
+		D(m_player1OnTurn.rect.y);
+		D(m_player1OnTurn.rect.w);
+		D(m_player1OnTurn.rect.h);
+		drawObject(m_player1OnTurn);
+	}
+	else if(m_onTurn == 2)
+	{
+		drawObject(m_player2OnTurn);
+	}
 }
 /*
 * used when we want to add an entity

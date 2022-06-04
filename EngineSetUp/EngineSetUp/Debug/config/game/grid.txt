@@ -1,5 +1,3 @@
-coordinates: 420
-squareSize: 100
 borderThickness: 20
 
 Player_On_Turn: 535 40 850 160
