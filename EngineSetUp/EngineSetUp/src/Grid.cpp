@@ -43,9 +43,11 @@ void Grid::load()
 	stream.close();
 
 	m_gridBorder.texture = loadTexture("game\\gridBorderTexture.bmp");
-	m_gridBase.texture = loadTexture("game\\gridSquareTexture.bmp");
 	m_possMove.texture = loadTexture("game\\gridPossMove.bmp");
 	m_hover.texture = loadTexture("game\\gridPossMove.bmp");
+
+	m_oddSquareTexture = loadTexture("game\\gridOddSquareTexture.bmp");
+	m_evenSquareTexture = loadTexture("game\\gridEvenSquareTexture.bmp");
 
 	m_gridBase.rect = { coordinates.x, coordinates.y, m_dimensions.y * m_squareDimension, m_dimensions.x * m_squareDimension };
 
@@ -57,15 +59,37 @@ void Grid::load()
 
 	m_gridSquares.resize(m_dimensions.y);
 	
-	for (int r = 0; r < m_dimensions.y; r++)
+	for (int r = 0; r < m_gridSquares.size(); r++)
 	{
 		m_gridSquares[r].resize(m_dimensions.x);
 		
-		for (int c = 0; c < m_dimensions.x; c++)
+		for (int c = 0; c < m_gridSquares[r].size(); c++)
 		{
 			m_gridSquares[r][c].isFree = true;
 			m_gridSquares[r][c].rect = { r * m_squareDimension + m_gridBase.rect.x, c * m_squareDimension + m_gridBase.rect.y, m_squareDimension, m_squareDimension };
-			m_gridSquares[r][c].texture = m_gridBase.texture;
+			
+			if (r % 2 == 0)
+			{
+				if (c % 2 == 0)
+				{
+					m_gridSquares[r][c].texture = m_evenSquareTexture;
+				}
+				else
+				{
+					m_gridSquares[r][c].texture = m_oddSquareTexture;
+				}
+			}
+			else
+			{
+				if (c % 2 == 0)
+				{
+					m_gridSquares[r][c].texture = m_oddSquareTexture;
+				}
+				else
+				{
+					m_gridSquares[r][c].texture = m_evenSquareTexture;
+				}
+			}
 		}
 	}
 }
@@ -78,7 +102,7 @@ void Grid::draw()
 
 	drawEntities();
 
-	drawPossibleMoves();
+	//drawPossibleMoves();
 
 	drawHover();
 }
@@ -98,9 +122,9 @@ void Grid::checkForClick()
 {
 	if (world.m_inputManager.m_mouseOnClick)
 	{
-		for (int r = 0; r < m_dimensions.x; r++)
+		for (int r = 0; r < m_gridSquares.size(); r++)
 		{
-			for (int c = 0; c < m_dimensions.y; c++)
+			for (int c = 0; c < m_gridSquares[r].size(); c++)
 			{
 				if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_gridSquares[r][c].rect))
 				{
@@ -125,9 +149,9 @@ void Grid::checkForClick()
 
 void Grid::drawGridSquares()
 {
-	for (int r = 0; r < m_dimensions.x; r++)
+	for (int r = 0; r < m_gridSquares.size(); r++)
 	{
-		for (int c = 0; c < m_dimensions.y; c++)
+		for (int c = 0; c < m_gridSquares[r].size(); c++)
 		{
 			drawObject(m_gridSquares[r][c]);
 		}
@@ -146,9 +170,9 @@ void Grid::drawEntities()
 void Grid::onHover()
 {
 	m_hoverGrid = nullptr;
-	for (int r = 0; r < m_dimensions.x; r++)
+	for (int r = 0; r < m_gridSquares.size(); r++)
 	{
-		for (int c = 0; c < m_dimensions.y; c++)
+		for (int c = 0; c < m_gridSquares[r].size(); c++)
 		{
 			if (MouseIsInRect(world.m_inputManager.m_mouseCoor, m_gridSquares[r][c].rect))
 			{
@@ -179,9 +203,9 @@ void Grid::drawPossibleMoves()
 void Grid::calcPossibleMoves()
 {
 	m_possibleMoves.clear();
-	for (int r = 0; r < m_dimensions.x; r++)
+	for (int r = 0; r < m_gridSquares.size(); r++)
 	{
-		for (int c = 0; c < m_dimensions.y; c++)
+		for (int c = 0; c < m_gridSquares[r].size(); c++)
 		{
 			// just some rand shit
 			if (c % 2 == 0 && r % 2 == 0) m_possibleMoves.push_back(&m_gridSquares[r][c]);

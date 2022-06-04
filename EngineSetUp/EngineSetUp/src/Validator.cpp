@@ -3,22 +3,13 @@
 
 extern World world;
 
-Validator::Validator()
-{
 
-}
-
-Validator::~Validator()
-{
-	
-}
-
-bool Validator::canMove(int2 coor)
+bool canMove(int2 coor)
 {
 	return false;
 }
 
-bool Validator::isNumber(string data)
+bool isNumber(string data)
 {
 	for (int i = 0; i < data.length(); i++)
 	{
