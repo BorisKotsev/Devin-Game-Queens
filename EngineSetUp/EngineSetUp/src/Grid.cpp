@@ -247,16 +247,28 @@ int2 Grid::mediumBot(vector<vector<gridSquare>> matrix)
 		D(possibleMoves[i].y);
 		vector<int2> unavailable = giveUnavailableMoves(possibleMoves[i], matrix.size(), matrix[0].size());
 		D(unavailable.size());
-		int temp = matrix.size() * matrix[0].size() - unavailable.size();
-		
-		if (temp == matrix.size() * matrix[0].size())
-		{
-			return possibleMoves[i];
-		}
+		int temp = matrix.size() * matrix[0].size();
 
 		for (int j = 0; j < unavailable.size(); j++)
 		{
 			newMatrix[unavailable[j].x][unavailable[j].y].isFree = false;
+		}
+
+		int freeSpots = 0;
+		for (int p = 0; p < matrix.size(); p++)
+		{
+			for (int k = 0; k < matrix[p].size(); k++)
+			{
+				if (matrix[p][k].isFree)
+				{
+					freeSpots++;
+				}
+			}
+		}
+
+		if (freeSpots == 0)
+		{
+			return possibleMoves[i];
 		}
 
 		if (checkForPossibleWin(newMatrix))
@@ -264,7 +276,12 @@ int2 Grid::mediumBot(vector<vector<gridSquare>> matrix)
 			temp = matrix.size() * matrix[0].size();
 			D(temp);
 		}
-		else if (temp < bestMove.efficiency)
+		else
+		{
+			temp = freeSpots;
+		}
+		
+		if (temp < bestMove.efficiency)
 		{
 			bestMove.coordinates = possibleMoves[i];
 			bestMove.efficiency = temp;
@@ -295,17 +312,43 @@ bool Grid::checkForPossibleWin(vector<vector<gridSquare>> matrix)
 	D("checking for wincond");
 	D(possibleMoves.size());
 		
+	vector<vector<gridSquare>>backup;
+	backup = matrix;
+
 	for (int l = 0; l < possibleMoves.size(); l++)
 	{
+		matrix = backup;
 		D(l);
 		D(possibleMoves[l].x);
 		D(possibleMoves[l].y);
 		vector<int2> unavailable = giveUnavailableMoves(possibleMoves[l], matrix.size(), matrix[0].size());
-		D(unavailable.size());
 
-		if (unavailable.size() == matrix.size() * matrix[0].size())
+		for (int i = 0; i < unavailable.size(); i++)
+		{
+			matrix[unavailable[i].x][unavailable[i].y].isFree = false;
+		}
+
+		int freeSpots = 0;
+
+		for (int i = 0; i < matrix.size(); i++)
+		{
+			for (int j = 0; j < matrix[i].size(); j++)
+			{
+				if (matrix[i][j].isFree)
+				{
+					D(i);
+					D(j);
+					freeSpots++;
+				}
+
+			}
+		}
+		
+		if (freeSpots == 0)
 		{
 			cout << "\npossible win in next move\n";
+			D(possibleMoves[l].x);
+			D(possibleMoves[l].y);
 			return true;
 		}
 	}
