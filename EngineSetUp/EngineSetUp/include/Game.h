@@ -1,5 +1,7 @@
 #pragma once
 
+#include <fstream>
+
 #include "State.h"
 #include "Grid.h"
 #include "ConfigManager.h"
@@ -12,15 +14,18 @@ public:
 	Game();
 	~Game();
 
+	Grid m_grid;
+
 	void init();
 	void destroy();
 	void run();
 
 	int winCondition(bool winner);
+	
 private:
-
 	InputField m_inputField;
 	ConfigManager m_config;
-	Grid m_grid;
-	
+
+	Drawable m_player1OnTurn;
+	Drawable m_player2OnTurn;
 };

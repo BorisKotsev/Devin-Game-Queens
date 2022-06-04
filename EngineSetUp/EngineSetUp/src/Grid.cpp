@@ -33,41 +33,43 @@ void Grid::load()
 	string temp;
 	fstream stream;
 
-	stream.open(CONFIG_FOLDER + "game\\grid.txt");
+	stream.open(CONFIG_FOLDER + GAME_FOLDER + "grid.txt");
 
 	stream >> temp >> coordinates.x >> coordinates.y;
-	stream >> temp >> m_dimensions.x >> m_dimensions.y;
 	stream >> temp >> m_squareDimension;
 	stream >> temp >> m_borderThickness;
 
 	stream.close();
+	
+	m_gridBorder.texture = loadTexture(GAME_FOLDER + "gridBorderTexture.bmp");
+	m_unavailableMove.texture = loadTexture(GAME_FOLDER + "unavailableTile.bmp");
+	m_hover.texture = loadTexture(GAME_FOLDER + "gridPossMove.bmp");
 
-	m_gridBorder.texture = loadTexture("game\\gridBorderTexture.bmp");
-	m_possMove.texture = loadTexture("game\\gridPossMove.bmp");
-	m_hover.texture = loadTexture("game\\gridPossMove.bmp");
-
-	m_oddSquareTexture = loadTexture("game\\gridOddSquareTexture.bmp");
-	m_evenSquareTexture = loadTexture("game\\gridEvenSquareTexture.bmp");
+	m_oddSquareTexture = loadTexture(GAME_FOLDER + "gridOddSquareTexture.bmp");
+	m_evenSquareTexture = loadTexture(GAME_FOLDER + "gridEvenSquareTexture.bmp");
 
 	m_gridBase.rect = { coordinates.x, coordinates.y, m_dimensions.y * m_squareDimension, m_dimensions.x * m_squareDimension };
 
 	m_gridBorder.rect = 
-	{	m_gridBase.rect.x - m_borderThickness, 
+	{	
+		m_gridBase.rect.x - m_borderThickness, 
 		m_gridBase.rect.y - m_borderThickness, 
 		m_gridBase.rect.w + 2 * m_borderThickness, 
-		m_gridBase.rect.h + 2 * m_borderThickness };
+		m_gridBase.rect.h + 2 * m_borderThickness 
+	};
 
-	m_gridSquares.resize(m_dimensions.y);
+	m_gridSquares.resize(m_dimensions.x);
 	
+		
 	for (int r = 0; r < m_gridSquares.size(); r++)
 	{
-		m_gridSquares[r].resize(m_dimensions.x);
+		m_gridSquares[r].resize(m_dimensions.y);
 		
 		for (int c = 0; c < m_gridSquares[r].size(); c++)
 		{
 			m_gridSquares[r][c].isFree = true;
-			m_gridSquares[r][c].rect = { r * m_squareDimension + m_gridBase.rect.x, c * m_squareDimension + m_gridBase.rect.y, m_squareDimension, m_squareDimension };
-
+			m_gridSquares[r][c].rect = { c * m_squareDimension + m_gridBase.rect.x, r * m_squareDimension + m_gridBase.rect.y, m_squareDimension, m_squareDimension };
+			
 			if (r % 2 == 0)
 			{
 				if (c % 2 == 0)
@@ -92,6 +94,10 @@ void Grid::load()
 			}
 		}
 	}
+	
+	cout << "GRID SIZE ROWS " << m_gridSquares.size() << " COLLS " << m_gridSquares[0].size();
+
+	m_onTurn = -1;
 }
 
 void Grid::draw()
@@ -102,16 +108,42 @@ void Grid::draw()
 
 	drawEntities();
 
-	//drawPossibleMoves();
+	drawUnavailableMoves();
 
 	drawHover();
+
+	SDL_Delay(2000);
 }
-
-void Grid::addEntity(int2 gridSquareIndex, int onTurn)
+/*
+* used when we want to add an entity
+* @param coor - where we want to add an entity (rows, colls)
+* @param onTurn - the curr player
+*/
+void Grid::addEntity(int2 coor, int onTurn)
 {
+	if (possMove(coor))
+	{
+		D(coor.x);
+		D(coor.y);
+		Entity* temp = new Entity(ConfigManager::m_enityModel, coor, onTurn);
+		m_entities.push_back(temp);
+		
+		vector<int2> buff = giveUnavailableMoves(coor, m_dimensions.x, m_dimensions.y);
+	
+		D("start");
 
-	Entity* temp = new Entity(ConfigManager::m_enityModel, gridSquareIndex, onTurn);
-	m_entities.push_back(temp);
+		for(int i = 0; i < buff.size(); i++)
+		{
+			cout << "r: " << buff[i].x << " c: " << buff[i].y << endl;
+			m_gridSquares[buff[i].x][buff[i].y].isFree = false;
+		}
+		
+		D("end");
+	}
+	else
+	{
+		cout << "Invalid move" << endl;
+	}
 }
 
 int Grid::getSquareDimension()
@@ -144,54 +176,44 @@ int2 Grid::mediumBot(vector<vector<gridSquare>> m_matrix)
 	// decide how many moves into the future to check
 	int moves = 1;
 
-	return playFutureMoves(m_matrix, moves).coordinates;
+	return playFutureMoves(m_matrix, moves, 1).coordinates;
 }
 
-AI_move Grid::playFutureMoves(vector<vector<gridSquare>> m_matrix, int movesIntoTheFuture)
+AI_move Grid::playFutureMoves(vector<vector<gridSquare>> matrix, int movesIntoTheFuture, int isMyTurn)
 {
-	// play a move - save how efficient it was
-	// reduce free Squares
+	vector<int2> possibleMoves;
+	for (int i = 0; i < matrix.size(); i++)
+	{
+		for (int j = 0; j < matrix[i].size(); j++)
+		{
+			if (matrix[i][j].isFree)
+			{
+				possibleMoves.push_back(int2{ i,j });
+			}
+		}
+	}   
+	// gets possible moves indexes
 
-	/*
 	if (movesIntoTheFuture == 0)
 	{
 		AI_move temp;
-
-		if ( == 0)
-		{
-			temp.efficiency = m_gridSquares.size() * m_gridSquares[0].size();
-			return temp;
-		}
-		else
-		{
-			temp.efficiency = freeSquares.size();
-			return temp;
-		}
+		temp.efficiency = possibleMoves.size();
+		return temp;
 	}
-	else
+
+	AI_move bestMove;
+	bestMove.efficiency = m_gridSquares.size() * m_gridSquares[0].size();
+
+	for (int i = 0; i < possibleMoves.size(); i++)
 	{
-		AI_move bestMove;
-		bestMove.efficiency = -1;
+		vector<vector<gridSquare>> newMoveMatrix;
 		
-		for (int i = 0; i < freeSquares.size(); i++)
-		{
-			vector<int2> futureFreeSquares;
-			futureFreeSquares = freeSquares;
-			futureFreeSquares.erase(futureFreeSquares.begin() + i);
-
-			AI_move tempMove = playFutureMoves(futureFreeSquares, movesIntoTheFuture--);
-
-			if (bestMove.efficiency < tempMove.efficiency)
-			{
-				bestMove.coordinates = freeSquares[i];
-				bestMove.efficiency = tempMove.efficiency;
-			}
-		}
-
-		return bestMove;
 	}
-	*/
-	return AI_move();
+
+}
+
+void Grid::getFutureUnavailableMoves(vector<vector<gridSquare>>& matrix, int2 coor)
+{
 }
 
 
@@ -268,33 +290,57 @@ void Grid::drawHover()
 	}
 }
 
-void Grid::drawPossibleMoves()
+void Grid::drawUnavailableMoves()
 {
-	for(gridSquare* gs : m_possibleMoves)
+	for(gridSquare* gs : m_unavailableMoves)
 	{
-		m_possMove.rect = gs->rect;
-		drawObject(m_possMove);
+		m_unavailableMove.rect = gs->rect;
+		drawObject(m_unavailableMove);
 	}
 }
 
-void Grid::calcPossibleMoves()
+void Grid::calcUnavailableMoves()
 {
-	m_possibleMoves.clear();
+	m_unavailableMoves.clear();
 	for (int r = 0; r < m_gridSquares.size(); r++)
 	{
 		for (int c = 0; c < m_gridSquares[r].size(); c++)
 		{
-			// just some rand shit
-			if (c % 2 == 0 && r % 2 == 0) m_possibleMoves.push_back(&m_gridSquares[r][c]);
+			if (m_gridSquares[r][c].isFree == false)
+			{
+				m_unavailableMoves.push_back(&m_gridSquares[r][c]);
+			}
 		}
 	}
+}
+
+/*
+* check for valid move when we add entity
+* @param coor - the coordinates of the square we are checking
+* @return true if the square is free, false if it is not
+*/
+bool Grid::possMove(int2 coor)
+{
+	if (inGrid(coor, m_dimensions.x, m_dimensions.y))
+	{
+		if (m_gridSquares[coor.x][coor.y].isFree)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 void Grid::update()
 {
 	onHover();
-
-	checkForClick();
-
-	calcPossibleMoves();
+	if (m_onTurn == -1)
+	{
+		addEntity(easyBot(m_gridSquares), m_onTurn);
+	}
+	else
+	{
+		checkForClick();
+	}
+	calcUnavailableMoves();
 }

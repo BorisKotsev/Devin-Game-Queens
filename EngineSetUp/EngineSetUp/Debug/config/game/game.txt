@@ -1,0 +1,3 @@
+Player_On_Turn: 535 40 850 160
+
+Plyaer_1_And_2_On_Turn: player1OnTurn.bmp player2OnTurn.bmp
