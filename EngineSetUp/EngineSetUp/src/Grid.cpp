@@ -33,7 +33,7 @@ void Grid::load(int opponent)
 
 	int2 coordinates;
 
-	string temp , player1OnTurn, player2OnTurn;
+	string temp , player1OnTurn, player2OnTurn, tutorailImg;
 	fstream stream;
 
 	stream.open(CONFIG_FOLDER + GAME_FOLDER + "grid.txt");
@@ -42,6 +42,8 @@ void Grid::load(int opponent)
 
 	stream >> temp >> m_player1OnTurn.rect.x >> m_player1OnTurn.rect.y >> m_player1OnTurn.rect.w >> m_player1OnTurn.rect.h;
 	stream >> temp >> player1OnTurn >> player2OnTurn;
+	stream >> temp >> m_tutorial.rect.x >> m_tutorial.rect.y >> m_tutorial.rect.w >> m_tutorial.rect.h;
+	stream >> temp >> tutorailImg;
 	
 	stream.close();
 
@@ -49,7 +51,9 @@ void Grid::load(int opponent)
 
 	m_player1OnTurn.texture = loadTexture(GAME_FOLDER + player1OnTurn);
 	m_player2OnTurn.texture = loadTexture(GAME_FOLDER + player2OnTurn);
+	m_tutorial.texture = loadTexture(GAME_FOLDER + tutorailImg);
 	
+	m_drawTutorial = true;
 	
 	m_gridBorder.texture = loadTexture(GAME_FOLDER + "gridBorderTexture.bmp");
 	m_unavailableMove.texture = loadTexture(GAME_FOLDER + "unavailableTile.bmp");
@@ -128,6 +132,11 @@ void Grid::draw()
 
 	drawHover();
 	
+	if (m_drawTutorial)
+	{
+		drawObject(m_tutorial);
+	}
+	
 	if (m_onTurn == 1)
 	{
 		drawObject(m_player1OnTurn);
@@ -177,6 +186,7 @@ void Grid::addEntity(int2 coor, int onTurn)
 
 		world.m_soundManager.playSound(SOUND::PLACE_QUEEN);
 		
+		m_drawTutorial = false;
 	}
 	else
 	{

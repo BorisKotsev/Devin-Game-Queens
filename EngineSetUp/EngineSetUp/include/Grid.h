@@ -53,6 +53,7 @@ private:
 	
 	Drawable m_player1OnTurn;
 	Drawable m_player2OnTurn;
+	Drawable m_tutorial;
 	
 	int m_opponent = 0;		// against who are we playing
 
@@ -88,4 +89,6 @@ private:
 	void calcUnavailableMoves();
 
 	bool possMove(int2 coor);
+
+	bool m_drawTutorial;
 };
