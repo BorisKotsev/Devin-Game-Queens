@@ -35,7 +35,7 @@ Entity::~Entity()
 
 void Entity::load(string entityName)
 {
-	m_obj.texture = loadTexture("game\\" + entityName + "Texture.bmp");
+	m_obj.texture = loadTexture("game\\" + entityName + ".bmp");
 
 }
 

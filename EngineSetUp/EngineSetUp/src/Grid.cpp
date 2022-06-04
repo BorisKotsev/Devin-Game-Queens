@@ -7,6 +7,7 @@ extern World world;
 Grid::Grid()
 {
 	m_hoverGrid = nullptr;
+	m_onTurn = 1;
 }
 
 Grid::Grid(const Grid* model)
@@ -26,8 +27,10 @@ Grid::~Grid()
 {
 }
 
-void Grid::load()
+void Grid::load(int opponent)
 {
+	m_opponent = opponent;
+
 	int2 coordinates;
 
 	string temp;
@@ -119,9 +122,21 @@ void Grid::addEntity(int2 coor, int onTurn)
 {
 	if (possMove(coor))
 	{
-		D(coor.x);
-		D(coor.y);
-		Entity* temp = new Entity(ConfigManager::m_enityModel, coor, onTurn);
+		Entity* temp;
+		switch (onTurn)
+		{
+		case 1:
+			temp = new Entity(ConfigManager::m_enityModelPlayer1, coor, onTurn);
+			break;
+		case 2:
+			temp = new Entity(ConfigManager::m_enityModelPlayer2, coor, onTurn);
+			break;
+		case -1:
+			temp = new Entity(ConfigManager::m_enityModelEnemy, coor, onTurn);
+			break;
+		default:
+			break;
+		}
 		m_entities.push_back(temp);
 		
 		vector<int2> buff = giveUnavailableMoves(coor, m_dimensions.x, m_dimensions.y);
