@@ -100,7 +100,6 @@ void Grid::load(int opponent)
 	
 	cout << "GRID SIZE ROWS " << m_gridSquares.size() << " COLLS " << m_gridSquares[0].size();
 
-	m_onTurn = -1;
 }
 
 void Grid::draw()
@@ -114,8 +113,6 @@ void Grid::draw()
 	drawEntities();
 
 	drawHover();
-
-	SDL_Delay(2000);
 }
 /*
 * used when we want to add an entity
@@ -136,6 +133,9 @@ void Grid::addEntity(int2 coor, int onTurn)
 			temp = new Entity(ConfigManager::m_enityModelPlayer2, coor, onTurn);
 			break;
 		case -1:
+			temp = new Entity(ConfigManager::m_enityModelEnemy, coor, onTurn);
+			break;
+		case -2:
 			temp = new Entity(ConfigManager::m_enityModelEnemy, coor, onTurn);
 			break;
 		default:
@@ -180,15 +180,16 @@ int2 Grid::easyBot(vector<vector<gridSquare>> m_matrix)
 		}
 	}
 	
-	int newCoord = 0 + rand() % freeSquares.size();
+	int randomIndex = 0 + rand() % freeSquares.size();
 
-	return int2{ freeSquares[newCoord].x, freeSquares[newCoord].y };
+	return freeSquares[randomIndex];
 }
 
 int2 Grid::mediumBot(vector<vector<gridSquare>> m_matrix)
 {
 	// decide how many moves into the future to check
 	int moves = 1;
+
 
 	return playFutureMoves(m_matrix, moves, 1).coordinates;
 }
@@ -217,13 +218,41 @@ AI_move Grid::playFutureMoves(vector<vector<gridSquare>> matrix, int movesIntoTh
 
 	AI_move bestMove;
 	bestMove.efficiency = m_gridSquares.size() * m_gridSquares[0].size();
+	AI_move temp;
 
 	for (int i = 0; i < possibleMoves.size(); i++)
 	{
 		vector<vector<gridSquare>> newMoveMatrix;
-		
+		vector<int2> unavailable = giveUnavailableMoves(possibleMoves[i], matrix.size(), matrix[0].size());
+
+		for (int i = 0; i < unavailable.size(); i++)
+		{
+			newMoveMatrix[unavailable[i].x][unavailable[i].y].isFree = false;
+		}
+
+		temp = playFutureMoves(newMoveMatrix, movesIntoTheFuture--, isMyTurn * (-1));	// gets efficiency
+		temp.coordinates = possibleMoves[i];											// gets coordinates
+
+		if (temp.efficiency != 0)						// get the more efficient move			
+		{
+			if (temp.efficiency < bestMove.efficiency)
+			{
+				bestMove.coordinates = temp.coordinates;
+				bestMove.efficiency = temp.efficiency;
+			}
+		}
+		else if (temp.efficiency == 0 && isMyTurn == -1) // player win con -> skip and forget this move
+		{
+
+		}
+		else if (temp.efficiency == 0 && isMyTurn == 0) // bot win con -> very good move
+		{
+			bestMove = temp;
+		}
+
 	}
 
+	return bestMove;
 }
 
 void Grid::getFutureUnavailableMoves(vector<vector<gridSquare>>& matrix, int2 coor)
@@ -348,9 +377,15 @@ bool Grid::possMove(int2 coor)
 void Grid::update()
 {
 	onHover();
+
 	if (m_onTurn == -1)
 	{
+		SDL_Delay(2000);
 		addEntity(easyBot(m_gridSquares), m_onTurn);
+	}
+	else if (m_onTurn == -2)
+	{
+		//addEntity(mediumBot(m_gridSquares), m_onTurn);
 	}
 	else
 	{

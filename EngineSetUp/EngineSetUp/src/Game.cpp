@@ -10,7 +10,7 @@ Game::~Game()
 
 void Game::init()
 {
-	m_grid.load(2);
+	m_grid.load(-1);
 	Entity::m_grid = &m_grid;
 
 	m_inputField.init("enterName.txt", "");
@@ -44,13 +44,13 @@ void Game::run()
 	m_grid.draw();
 	//m_inputField.draw();
 
-	if () // player on turn
+	if (true) // player on turn
 	{
-		drawObject(m_player1OnTurn);
+		//drawObject(m_player1OnTurn);
 	}
 	else
 	{
-		drawObject(m_player2OnTurn);
+		//drawObject(m_player2OnTurn);
 	}
 }
 
