@@ -67,7 +67,7 @@ void Grid::load()
 		{
 			m_gridSquares[r][c].isFree = true;
 			m_gridSquares[r][c].rect = { r * m_squareDimension + m_gridBase.rect.x, c * m_squareDimension + m_gridBase.rect.y, m_squareDimension, m_squareDimension };
-			
+
 			if (r % 2 == 0)
 			{
 				if (c % 2 == 0)
@@ -109,6 +109,7 @@ void Grid::draw()
 
 void Grid::addEntity(int2 gridSquareIndex, int onTurn)
 {
+
 	Entity* temp = new Entity(ConfigManager::m_enityModel, gridSquareIndex, onTurn);
 	m_entities.push_back(temp);
 }
@@ -117,6 +118,82 @@ int Grid::getSquareDimension()
 {
 	return m_squareDimension;
 }
+
+int2 Grid::easyBot(vector<vector<gridSquare>> m_matrix)
+{
+	vector<int2> freeSquares;
+
+	for (int i = 0; i < m_matrix.size(); i++)
+	{
+		for (int j = 0; j < m_matrix[i].size(); j++)
+		{
+			if (m_matrix[i][j].isFree)
+			{
+				freeSquares.push_back(int2{i,j});
+			}
+		}
+	}
+	
+	int newCoord = 0 + rand() % freeSquares.size();
+
+	return int2{ freeSquares[newCoord].x, freeSquares[newCoord].y };
+}
+
+int2 Grid::mediumBot(vector<vector<gridSquare>> m_matrix)
+{
+	// decide how many moves into the future to check
+	int moves = 1;
+
+	return playFutureMoves(m_matrix, moves).coordinates;
+}
+
+AI_move Grid::playFutureMoves(vector<vector<gridSquare>> m_matrix, int movesIntoTheFuture)
+{
+	// play a move - save how efficient it was
+	// reduce free Squares
+
+	/*
+	if (movesIntoTheFuture == 0)
+	{
+		AI_move temp;
+
+		if ( == 0)
+		{
+			temp.efficiency = m_gridSquares.size() * m_gridSquares[0].size();
+			return temp;
+		}
+		else
+		{
+			temp.efficiency = freeSquares.size();
+			return temp;
+		}
+	}
+	else
+	{
+		AI_move bestMove;
+		bestMove.efficiency = -1;
+		
+		for (int i = 0; i < freeSquares.size(); i++)
+		{
+			vector<int2> futureFreeSquares;
+			futureFreeSquares = freeSquares;
+			futureFreeSquares.erase(futureFreeSquares.begin() + i);
+
+			AI_move tempMove = playFutureMoves(futureFreeSquares, movesIntoTheFuture--);
+
+			if (bestMove.efficiency < tempMove.efficiency)
+			{
+				bestMove.coordinates = freeSquares[i];
+				bestMove.efficiency = tempMove.efficiency;
+			}
+		}
+
+		return bestMove;
+	}
+	*/
+	return AI_move();
+}
+
 
 void Grid::checkForClick()
 {
@@ -131,7 +208,7 @@ void Grid::checkForClick()
 					int2 coor;
 					coor.x = r;
 					coor.y = c;
-					
+
 					addEntity(coor, m_onTurn);
 				}
 			}

@@ -6,6 +6,13 @@
 #include "Entity.h"
 
 
+struct AI_move
+{
+	int2 coordinates;
+	int efficiency;
+};
+
+
 /*
 \brief Grid structure splitting a place into gridded squares
 */
@@ -29,7 +36,10 @@ public:
 	
 	int getSquareDimension();
 
-
+	int2 easyBot(vector<vector<gridSquare>> m_matrix);			// returns the AI decision of coordinates to place the new entity
+	int2 mediumBot(vector<vector<gridSquare>> m_matrix);
+	AI_move playFutureMoves(vector<vector<gridSquare>> m_matrix, int movesIntoTheFuture);
+	
 private:
 	
 	Drawable m_gridBase;	// background of the grid
@@ -51,6 +61,8 @@ private:
 	vector<Entity*> m_entities;
 	Entity* m_currentEntity = nullptr;
 	int2 m_lastEntityCoordinates;
+
+	vector<int2> m_freeSquares;	// contains all free squares for fast access
 
 	vector<gridSquare*> m_possibleMoves;
 
